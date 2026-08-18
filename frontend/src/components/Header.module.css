@@ -1,0 +1,138 @@
+.header {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	width: 100%;
+	height: var(--header-height);
+	padding: 0 var(--side-padding);
+	border-bottom: 1px solid var(--hr-color);
+	background-color: var(--bg-color);
+}
+
+.headerContent {
+	max-width: var(--page-width);
+	width: 100%;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+	gap: 32px;
+	margin-right: auto;
+}
+
+.nav a {
+	color: var(--text-to-read);
+	text-decoration: none;
+	font-size: 16px;
+}
+
+.header a:hover,
+.search svg:hover {
+	opacity: var(--opacity-percent);
+	cursor: pointer;
+}
+
+.logo {
+	white-space: nowrap;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.logo span {
+	font-family: Staatliches;
+	font-size: 28px;
+	color: var(--text-color);
+}
+
+.logo svg {
+	height: 28px;
+	width: 28px;
+}
+
+.icons {
+	display: flex;
+	gap: 25px;
+	margin-left: 25px;
+	line-height: 0;
+}
+
+.icons svg,
+.search svg {
+	min-height: 24px;
+	min-width: 24px;
+}
+
+.icons a {
+	display: inline-flex;
+}
+
+.search {
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.search svg {
+	margin-left: auto;
+}
+
+.search input {
+	background-color: var(--bg-contrast);
+	color: var(--text-color);
+	border-radius: 10px;
+	font-size: 16px;
+	height: 40px;
+	width: 100%;
+	padding: 0 40px 0 20px;
+	margin: 0 25px;
+	box-sizing: border-box;
+	outline: none;
+	border: none;
+}
+
+.search input::placeholder {
+	color: var(--text-gray);
+}
+
+.search .searchResults {
+	position: absolute;
+	left: 0;
+	top: 60px;
+	list-style: none;
+	width: 100%;
+	max-width: 1000px;
+	background-color: var(--bg-color);
+	border-radius: 20px;
+	z-index: 1;
+	box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.05);
+	padding: 8px;
+	box-sizing: border-box;
+}
+
+.search .searchResults li {
+	display: flex;
+	align-items: center;
+	height: 60px;
+	padding: 16px;
+	border-radius: 15px;
+	font-size: 16px;
+	color: var(--text-color);
+	cursor: pointer;
+}
+
+.search .searchResults li span {
+	font-size: 14px;
+	color: var(--text-gray);
+}
+
+.search .searchResults li:hover {
+	background-color: var(--bg-contrast);
+}

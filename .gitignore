@@ -1,0 +1,56 @@
+node_modules
+dist
+.env*
+!.env.example
+.DS_Store
+
+# temporary
+frontend/README.md
+backend/src/controllers/seo.controller.ts
+backend/src/routes/seo.routes.ts
+docker/init.sql
+frontend/src/app/privacy
+frontend/src/app/sitemap.js
+frontend/src/app/robots.txt
+frontend/src/app/all
+frontend/src/app/articles
+frontend/src/app/cities
+frontend/src/app/collections
+frontend/src/app/places
+frontend/src/components/archive
+frontend/src/styles
+
+# dependencies
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

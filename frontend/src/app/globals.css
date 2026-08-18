@@ -1,0 +1,59 @@
+:root {
+	--bg-color: #fff;
+	--text-color: #000;
+	--text-to-read: #363636;
+	--hr-color: #F5F5F5;
+	--bg-contrast: #F8F8F7;
+	--text-gray: #777777;
+	--swamp-green: #3C4226;
+	--swamp-green-hr: #4D553C;
+
+	--side-padding: 16px;
+	--header-height: 60px;
+	--page-width: 1000px;
+	--footer-margin: 60px;
+	--header-margin: 16px;
+	--opacity-percent: 0.7;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('/fonts/Inter-VariableFont.ttf') format('truetype');
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Staatliches';
+	src: url('/fonts/Staatliches-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Unbounded';
+	src: url('/Unbounded-VariableFont_wght.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+body {
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	margin-top: var(--header-height);
+
+	height: calc(100vh - var(--header-height));
+	display: grid;
+	grid-template-rows: 1fr auto;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Inter', sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	box-sizing: border-box;
+	line-height: 150%;
+}

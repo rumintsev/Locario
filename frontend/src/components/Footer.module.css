@@ -1,0 +1,77 @@
+.footer {
+	padding: 0 var(--side-padding);
+	margin-top: var(--header-margin);
+	background-color: var(--swamp-green);
+	color: var(--bg-color);
+	height: fit-content;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.footerContent {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	padding: 36px 0;
+	max-width: 1000px;
+	width: 100%;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 12px;
+}
+
+.logo p {
+	font-family: Staatliches;
+	font-size: 28px;
+}
+
+.footerTop {
+	display: flex;
+	gap: 85px;
+}
+
+.logoWithDescription {
+	max-width: 266px;
+}
+
+.footerNav {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.footerNav li a,
+.footerBottom a {
+	color: var(--bg-color);
+	text-decoration: none;
+}
+
+.footerNav li a:hover,
+.footerBottom a:hover {
+	opacity: var(--opacity-percent);
+}
+
+.footerNav li:first-child {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.hr {
+	background-color: var(--swamp-green-hr);
+	height: 1px;
+	border: none;
+}
+
+.footerBottom {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	row-gap: 16px;
+	column-gap: 16px;
+}
