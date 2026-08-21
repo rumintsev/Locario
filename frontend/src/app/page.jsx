@@ -1,6 +1,16 @@
 // import Head from 'next/head';
 import Link from 'next/link';
+
+// css
 import styles from './page.module.css'
+
+import Hero from '@/_components/Hero';
+import Categories from '@/_components/Categories';
+import Collections from '@/_components/Collections';
+import Articles from '@/_components/Articles';
+import Places from '@/_components/Places';
+import EmailSubscribe from '@/_components/EmailSubscribe';
+
 
 // export const metadata = {
 //   title: "Подборки интересных мест - Locario",
@@ -16,14 +26,13 @@ export default async function MainPage() {
 			{/* <Head>
         <meta name="yandex-verification" content="6460b2e6eeea2ab5" />
       </Head> */}
-			<div className={styles.mainPage}>
-
-				<section>
-					<Link href='/' className={styles.headline}>
-						Категории
-					</Link>
-				</section>
-
+			<div>
+				<Hero />
+				<Categories />
+				<Collections />
+				<Articles />
+				<Places />
+				<EmailSubscribe />
 			</div >
 		</>
 	);

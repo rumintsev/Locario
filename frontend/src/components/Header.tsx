@@ -4,7 +4,7 @@ import { z } from "zod";
 import { useState, useEffect, useRef } from "react";
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
-import { fetchEndpoint } from "../app/actions/fetch";
+import { clientFetch } from "../app/actions/clientFetch";
 
 // css
 import styles from './Header.module.css';
@@ -62,7 +62,7 @@ export default function Header() {
 
 		const timeout = setTimeout(async () => {
 			try {
-				const data = await fetchEndpoint(`/search/short?q=${encodeURIComponent(searchTerm)}`);
+				const data = await clientFetch(`/search/short?q=${encodeURIComponent(searchTerm)}`);
 
 				if (cancelled) return;
 

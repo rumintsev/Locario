@@ -6,6 +6,7 @@ interface CollectionBase {
 	name: string;
 	type: "places" | "cities";
 	updateddate: string; // 'YYYY-MM-DD'
+	cards_count: number;
 }
 
 interface CollectionFullResponse extends CollectionBase {
@@ -108,8 +109,9 @@ const baseQuery = `
 					COALESCE(photo.urls, '[]'::json) AS photos,
 					CASE 
 							WHEN tag.id IS NULL THEN NULL 
-							ELSE json_build_object('id', tag.id, 'name', tag.name, 'slug', tag.slug) 
-					END AS tag
+							ELSE json_build_object('id', tag.id, 'name', tag.name, 'slug', tag.slug, 'text_color', tag.text_color, 'bg_color', tag.bg_color) 
+					END AS tag,
+					COALESCE(cnt.cards_count, 0) AS cards_count
 			FROM collections c
 			LEFT JOIN LATERAL (
 					SELECT json_agg(found.photo_url ORDER BY found.entity_position) AS urls
@@ -141,12 +143,26 @@ const baseQuery = `
 					) found
 			) photo ON true
 			LEFT JOIN LATERAL (
-					SELECT t.id, t.name, t.slug
+					SELECT t.id, t.name, t.slug, t.text_color, t.bg_color
 					FROM collection_tags pt
 					JOIN tags t ON t.id = pt.tag_id
 					WHERE pt.collection_id = c.id AND pt.position = 1
 					LIMIT 1
 			) tag ON true
+			LEFT JOIN LATERAL (
+					SELECT COUNT(*)::int as cards_count
+					FROM (
+							SELECT cp.place_id AS entity_id
+							FROM collection_places cp
+							WHERE cp.collection_id = c.id
+
+							UNION ALL
+
+							SELECT cc.city_id
+							FROM collection_cities cc
+							WHERE cc.collection_id = c.id
+					) all_cards
+			) cnt ON true
 			WHERE
 	`;
 
