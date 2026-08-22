@@ -4,6 +4,9 @@ import { z } from 'zod';
 import Headline from "@/components/ui/Headline";
 import Error from "@/components/ui/Error";
 
+// css
+import styles from './Collections.module.css'
+
 import Collection from "@/components/Collection";
 import { serverFetch } from "@/lib/serverFetch";
 
@@ -13,7 +16,7 @@ const CollectionsSchema = z.array(z.object({
 	type: z.enum(["places", "cities"]),
 	updateddate: z.string(), // 'YYYY-MM-DD'
 	cards_count: z.number(),
-	photos: z.array(z.string()).nullable(),
+	photos: z.array(z.string()),
 	tag: z.object({
 		id: z.number(),
 		name: z.string(),
@@ -34,22 +37,11 @@ export default async function Collections() {
 	if (hasError) console.error(result.error)
 
 	return (
-		<div style={{
-			padding: '0 var(--side-padding)',
-			display: 'flex',
-			justifyContent: 'center',
-		}}>
-			<div style={{
-				maxWidth: 'var(--page-width)',
-				width: '100%'
-			}}>
+		<div className={styles.collections}>
+			<div className={styles.collectionsContent}>
 				<Headline headline="Подборки" link="/" />
 				{collections.length > 0 ? (
-					<div style={{
-						display: 'grid',
-						gridTemplateColumns: '1fr 1fr',
-						gridAutoRows: '1fr 1fr'
-					}}>
+					<div className={styles.collectionsGrid}>
 						{collections.slice(0, 4).map((collection) => (
 							<Collection key={collection.id} collection={collection} />
 						))}

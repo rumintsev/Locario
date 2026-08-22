@@ -8,6 +8,7 @@
 	--swamp-green: #3C4226;
 	--swamp-green-hr: #4D553C;
 	--orange: #F5B637;
+	--button-bg: #F7F7F7;
 
 	--side-padding: 16px;
 	--header-height: 60px;
@@ -15,6 +16,7 @@
 	--footer-margin: 60px;
 	--header-margin: 16px;
 	--opacity-percent: 0.7;
+	--headline-gap: 30px;
 }
 
 @font-face {

@@ -1,0 +1,20 @@
+.articles {
+	padding: 0 var(--side-padding);
+	display: flex;
+	justify-content: center;
+}
+
+.articlesContent {
+	max-width: var(--page-width);
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: var(--headline-gap);
+}
+
+.articlesGrid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	gap: 30px 20px;
+}

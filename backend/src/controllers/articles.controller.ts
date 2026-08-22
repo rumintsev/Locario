@@ -55,7 +55,7 @@ const baseQuery = `
 			photo.url AS photo,
 			CASE 
 				WHEN tag.id IS NULL THEN NULL 
-				ELSE json_build_object('id', tag.id, 'name', tag.name, 'slug', tag.slug) 
+				ELSE json_build_object('id', tag.id, 'name', tag.name, 'slug', tag.slug, 'text_color', tag.text_color, 'bg_color', tag.bg_color) 
 			END AS tag
 		FROM articles a
 		LEFT JOIN LATERAL (
@@ -65,7 +65,7 @@ const baseQuery = `
 			LIMIT 1
 		) photo ON true
 		LEFT JOIN LATERAL (
-			SELECT t.id, t.name, t.slug
+			SELECT t.id, t.name, t.slug, t.text_color, t.bg_color
 			FROM article_tags at
 			JOIN tags t ON t.id = at.tag_id
 			WHERE at.article_id = a.id AND at.position = 1

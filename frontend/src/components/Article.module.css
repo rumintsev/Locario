@@ -1,0 +1,53 @@
+.article {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	position: relative;
+}
+
+.photo {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	border-radius: 15px;
+	overflow: hidden;
+}
+
+.photoDummy {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	border-radius: 15px;
+	background-color: var(--bg-contrast);
+}
+
+.tag {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	z-index: 1;
+}
+
+.bookmark {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 1;
+}
+
+.name {
+	text-decoration: none;
+	color: var(--text-color);
+	font-weight: 500;
+	font-size: 18px;
+}
+
+.name:hover {
+	opacity: var(--opacity-percent);
+}
+.extra {
+	color: var(--text-to-read);
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}

@@ -1,5 +1,8 @@
 import { z } from 'zod';
 
+// css
+import styles from './Articles.module.css'
+
 // ui
 import Headline from "@/components/ui/Headline";
 import Error from "@/components/ui/Error";
@@ -15,7 +18,9 @@ const ArticlesSchema = z.array(z.object({
 	tag: z.object({
 		id: z.number(),
 		name: z.string(),
-		slug: z.string()
+		slug: z.string(),
+		text_color: z.string(),
+		bg_color: z.string()
 	}).nullable()
 }));
 
@@ -30,28 +35,20 @@ export default async function Articles() {
 	if (hasError) console.error(result.error)
 
 	return (
-		<div style={{
-			padding: '0 var(--side-padding)',
-			display: 'flex',
-			justifyContent: 'center',
-		}}>
-			<div style={{
-				maxWidth: 'var(--page-width)',
-				width: '100%'
-			}}>
+		<div className={styles.articles}>
+			<div className={styles.articlesContent}>
+
 				<Headline headline="Полезное" link="/" />
+				
 				{articles.length > 0 ? (
-					<div style={{
-						display: 'grid',
-						gridTemplateColumns: '1fr 1fr',
-						gridAutoRows: '1fr 1fr'
-					}}>
+					<div className={styles.articlesGrid}>
 						{articles.map((article) => (
 							<Article key={article.id} article={article} />
 						))}
 					</div>) : hasError ? (
 						<Error text='Ошибка загрузки статей' />
 					) : null}
+
 			</div>
 		</div>
 	)

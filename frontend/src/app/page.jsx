@@ -26,7 +26,7 @@ export default async function MainPage() {
 			{/* <Head>
         <meta name="yandex-verification" content="6460b2e6eeea2ab5" />
       </Head> */}
-			<div>
+			<div className={styles.mainPage}>
 				<Hero />
 				<Categories />
 				<Collections />
