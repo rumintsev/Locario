@@ -28,24 +28,30 @@ export default function Hero() {
 					<p>Находите места по душе рядом с вами: атмосферные кафе,
 						красивые маршруты и секретные уголки города</p>
 
-					<div className={styles.tagsBlock}>
-						<p>Популярно сейчас:</p>
-						<div className={styles.tags}>
-							<Link href='/tag/'>
-								Природа
-							</Link>
-							<Link href='/tag/'>
-								Здоровье
-							</Link>
-							<Link href='/tag/'>
-								Петербург
-							</Link>
-							<Link href='/tag/'>
-								Беларусь
-							</Link>
+					<div className={styles.bottomBlock}>
+
+						<div className={styles.tagsBlock}>
+							<p>Популярно сейчас:</p>
+							<div className={styles.tags}>
+								<Link href='/tag/'>
+									Природа
+								</Link>
+								<Link href='/tag/'>
+									Здоровье
+								</Link>
+								<Link href='/tag/'>
+									Петербург
+								</Link>
+								<Link href='/tag/'>
+									Беларусь
+								</Link>
+							</div>
 						</div>
+
+						<Image src={heroImg} alt="Hero" />
+
 					</div>
-					
+
 				</div>
 
 				<div className={styles.heroRight}>

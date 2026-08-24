@@ -3,6 +3,8 @@
 	flex-direction: column;
 	gap: 12px;
 	position: relative;
+	container-type: inline-size;
+	container-name: article;
 }
 
 .photo {
@@ -44,10 +46,21 @@
 .name:hover {
 	opacity: var(--opacity-percent);
 }
+
 .extra {
 	color: var(--text-to-read);
 	font-size: 14px;
 	display: flex;
 	align-items: center;
 	gap: 6px;
+}
+
+@container article (max-width: 567px) {
+	.name {
+		font-size: 16px;
+	}
+
+	.extra {
+		font-size: 12px;
+	}
 }

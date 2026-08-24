@@ -50,6 +50,18 @@ export default function Header() {
 	const [searchResult, setSearchResult] = useState<SearchResultShort[]>([]);
 	const [hasFetched, setHasFetched] = useState(false);
 	const [isSearchOpen, setIsSearchOpen] = useState(false);
+	const [isMobile, setIsMobile] = useState(false)
+
+	useEffect(() => {
+		const mediaQuery = window.matchMedia(`(max-width: ${799 - 1}px)`)
+
+		setIsMobile(mediaQuery.matches)
+
+		const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+		mediaQuery.addEventListener('change', handler)
+
+		return () => mediaQuery.removeEventListener('change', handler)
+	}, [])
 
 	useEffect(() => {
 		if (!searchTerm) {
@@ -182,9 +194,12 @@ export default function Header() {
 					/>
 				</div>
 
-				<div className={styles.icons}>
+				<div
+					className={styles.icons}
+					style={{ display: isSearchOpen && isMobile ? 'none' : 'flex' }}
+				>
 					<Link href={'/favourite'}><FavouriteIcon /></Link>
-					<Link href={'/profile'}><ProfileIcon /></Link>
+					<Link href={'/'}><ProfileIcon /></Link>
 				</div>
 			</div>
 		</header >

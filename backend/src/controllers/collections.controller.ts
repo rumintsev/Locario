@@ -11,12 +11,24 @@ interface CollectionBase {
 
 interface CollectionFullResponse extends CollectionBase {
 	description: string | null;
-	tags: { id: number; name: string; slug: string }[] | null;
+	tags: {
+		id: number;
+		name: string;
+		slug: string;
+		text_color: string;
+		bg_color: string;
+	}[] | null;
 }
 
 interface CollectionShortResponse extends CollectionBase {
 	photo: string[] | null;
-	tag: { id: number; name: string; slug: string } | null;
+	tag: {
+		id: number;
+		name: string;
+		slug: string;
+		text_color: string;
+		bg_color: string;
+	} | null;
 }
 
 export async function getCollectionFull(req: Request, res: Response) {

@@ -26,50 +26,63 @@ interface Collection {
 
 export default function Collection({ collection }: { collection: Collection }) {
 	return (
-		<div className={styles.collection}>
+		<div className={styles.collectionComponent}>
+			<div className={styles.collection}>
 
-			<BookmarkButton className={styles.bookmark} />
+				<BookmarkButton className={styles.bookmark} />
 
-			<div className={styles.photos}>
-				{collection.photos.length >= 2 ? (
-					<>
-						<div className={styles.photoGrid}>
-							<div className={styles.photo}>
-								<Image src={`/img/${collection.photos[0]}`} alt='First collection image' fill />
+				<div className={styles.photos}>
+					{collection.photos.length >= 2 ? (
+						<>
+							<div className={styles.photoGrid}>
+								<div className={styles.photo}>
+									<Image
+										src={`/img/places/${collection.photos[0]}`}
+										alt='First collection image'
+										fill
+										sizes="150px, 190px"
+									/>
+								</div>
 							</div>
-						</div>
-						<div className={styles.photoGrid}>
-							<div className={styles.photo}>
-								<Image src={`/img/${collection.photos[1]}`} alt='Second collection image' fill />
+							<div className={styles.photoGrid}>
+								<div className={styles.photo}>
+									<Image
+										src={`/img/places/${collection.photos[1]}`}
+										alt='Second collection image'
+										fill
+										sizes="150px, 190px"
+									/>
+								</div>
 							</div>
-						</div>
-					</>
-				) : (
-					<>
-						<div className={styles.photoGrid}>
-							<div className={styles.photoDummy} />
-						</div>
-						<div className={styles.photoGrid}>
-							<div className={styles.photoDummy} />
-						</div>
-					</>
-				)}
-			</div>
+						</>
+					) : (
+						<>
+							<div className={styles.photoGrid}>
+								<div className={styles.photoDummy} />
+							</div>
+							<div className={styles.photoGrid}>
+								<div className={styles.photoDummy} />
+							</div>
+						</>
+					)}
+				</div>
 
-			<div className={styles.collectionDescription}>
-				{collection.tag && (
-					<Tag tag={collection.tag} />
-				)}
+				<div className={styles.collectionDescription}>
+					{collection.tag && (
+						<Tag tag={collection.tag} />
+					)}
 
-				<Link href={`/collections/${collection.id}`}>{collection.name}</Link>
-				<p className={styles.extra}>
-					{collection.cards_count} карточек <span /> {new Date(
-						collection.updateddate).toLocaleDateString('ru-RU', {
-							day: 'numeric',
-							month: 'long',
-							year: 'numeric',
-						}).replace(' г.', '')}
-				</p>
+					<Link href={`/collections/${collection.id}`}>{collection.name}</Link>
+					<p className={styles.extra}>
+						{collection.cards_count} карточек <span /> {new Date(
+							collection.updateddate).toLocaleDateString('ru-RU', {
+								day: 'numeric',
+								month: 'long',
+								year: 'numeric',
+							}).replace(' г.', '')}
+					</p>
+				</div>
+
 			</div>
 		</div>
 	)

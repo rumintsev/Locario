@@ -1,3 +1,8 @@
+.collectionComponent {
+	container-type: inline-size;
+	container-name: collection;
+}
+
 .collection {
 	display: flex;
 	gap: 15px;
@@ -33,6 +38,7 @@
 	display: flex;
 	align-items: center;
 	gap: 6px;
+	white-space: nowrap;
 }
 
 .extra span {
@@ -47,11 +53,11 @@
 .photos {
 	position: relative;
 	min-width: 165px;
-	height: min-content;
 }
 
 .photoGrid {
 	display: grid;
+	width: 100%;
 }
 
 .photo {
@@ -85,14 +91,47 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100%;
 	z-index: 0;
 }
 
 .photoGrid:nth-child(2) .photo {
 	grid-column: 2;
+	min-width: 0;
 }
 
 .photoGrid:nth-child(2) .photoDummy {
 	grid-column: 2;
+	min-width: 0;
+}
+
+@container collection (max-width: 489px) {
+	.photos {
+		min-width: 145px;
+	}
+}
+
+@media (max-width: 799px) {
+	@container collection (max-width: 767px) {
+		.photos {
+			min-width: 165px;
+		}
+	}
+
+	@container collection (max-width: 567px) {
+		.collection {
+			gap: 10px;
+		}
+
+		.photos {
+			min-width: 123px;
+		}
+
+		.collection a {
+			font-size: 16px;
+		}
+
+		.extra {
+			font-size: 12px;
+		}
+	}
 }

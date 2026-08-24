@@ -37,7 +37,12 @@ export default function Article({ article }: { article: Article }) {
 			}
 			{article.photo ? (
 				<div className={styles.photo}>
-					<Image src={`/img/${article.photo}`} alt='Article image' fill />
+					<Image
+						src={`/img/articles/${article.photo}`}
+						alt='Article image'
+						fill
+						sizes="660px, 315px"
+					/>
 				</div>
 			) : (
 				<div className={styles.photoDummy} />

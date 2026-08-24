@@ -63,6 +63,7 @@
 	gap: 25px;
 	margin-left: 25px;
 	line-height: 0;
+	width: fit-content;
 }
 
 .icons svg,
@@ -136,4 +137,10 @@
 
 .search .searchResults li:hover {
 	background-color: var(--bg-contrast);
+}
+
+@media (max-width: 799px) {
+	.logo span {
+		font-size: 24px;
+	}
 }

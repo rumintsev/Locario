@@ -13,12 +13,24 @@ interface PlaceFullResponse extends PlaceBase {
 	article: string | null;
 	loc: string | null;
 	photo: string[];
-	tags: { id: number; name: string; slug: string }[] | null;
+	tags: {
+		id: number;
+		name: string;
+		slug: string;
+		text_color: string;
+		bg_color: string;
+	}[] | null;
 }
 
 interface PlaceShortResponse extends PlaceBase {
 	photo: string | null;
-	tag: { id: number; name: string; slug: string } | null;
+	tag: {
+		id: number;
+		name: string;
+		slug: string;
+		text_color: string;
+		bg_color: string;
+	} | null;
 }
 
 export async function getPlaceFull(req: Request, res: Response) {
@@ -45,7 +57,7 @@ export async function getPlaceFull(req: Request, res: Response) {
 					WHERE pp.place_id = p.id
 			) photos ON true
 			LEFT JOIN LATERAL (
-					SELECT json_agg(json_build_object('id', t.id, 'name', t.name, 'slug', t.slug) ORDER BY pt.position) AS items
+					SELECT json_agg(json_build_object('id', t.id, 'name', t.name, 'slug', t.slug, 'text_color', t.text_color, 'bg_color', t.bg_color) ORDER BY pt.position) AS items
 					FROM place_tags pt
 					JOIN tags t ON t.id = pt.tag_id
 					WHERE pt.place_id = p.id
@@ -65,7 +77,7 @@ const baseQuery = `
 			photo.url AS photo,
 			CASE 
 				WHEN tag.id IS NULL THEN NULL 
-				ELSE json_build_object('id', tag.id, 'name', tag.name, 'slug', tag.slug) 
+				ELSE json_build_object('id', tag.id, 'name', tag.name, 'slug', tag.slug, 'text_color', tag.text_color, 'bg_color', tag.bg_color) 
 			END AS tag
 		FROM places p
 		LEFT JOIN LATERAL (
@@ -75,7 +87,7 @@ const baseQuery = `
 			LIMIT 1
 		) photo ON true
 		LEFT JOIN LATERAL (
-			SELECT t.id, t.name, t.slug
+			SELECT t.id, t.name, t.slug, t.text_color, t.bg_color
 			FROM place_tags pt
 			JOIN tags t ON t.id = pt.tag_id
 			WHERE pt.place_id = p.id AND pt.position = 1

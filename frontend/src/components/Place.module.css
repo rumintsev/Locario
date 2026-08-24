@@ -1,0 +1,103 @@
+.place {
+	display: flex;
+	position: relative;
+	gap: 15px;
+	container-type: inline-size;
+	container-name: place;
+}
+
+.bookmark {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
+}
+
+.photo,
+.photoDummy {
+	position: relative;
+	aspect-ratio: 3 / 4;
+	width: 140px;
+	border-radius: 15px;
+	overflow: hidden;
+}
+
+.photoDummy {
+	background-color: var(--bg-contrast);
+}
+
+.placeDescription {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.tagBar {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+}
+
+.rate {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	height: 30px;
+	padding: 8px;
+	background-color: var(--button-bg);
+	border-radius: 10px;
+}
+
+.placeDescription a {
+	color: var(--text-color);
+	font-size: 18px;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.placeDescription a:hover {
+	opacity: var(--opacity-percent);
+}
+
+.extra {
+	font-size: 14px;
+	color: var(--text-to-read);
+}
+
+@container place (max-width: 489px) {
+
+	.photo,
+	.photoDummy {
+		width: 124px;
+	}
+}
+
+@media (max-width: 799px) {
+	@container place (max-width: 767px) {
+
+		.photo,
+		.photoDummy {
+			width: 140px;
+		}
+	}
+
+	@container place (max-width: 567px) {
+
+		.photo,
+		.photoDummy {
+			width: 105px;
+		}
+
+		.placeDescription a {
+			font-size: 16px;
+		}
+
+		.extra {
+			font-size: 12px;
+		}
+
+		.rate {
+			font-size: 14px;
+		}
+	}
+}

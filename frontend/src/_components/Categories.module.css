@@ -7,9 +7,6 @@
 .categoriesContent {
 	width: 100%;
 	max-width: var(--page-width);
-	display: flex;
-	flex-direction: column;
-	gap: 30px;
 }
 
 .categoriesBages {
@@ -57,4 +54,18 @@
 
 .categoriesBages a:nth-child(6) {
 	background-color: #BBA5DD;
+}
+
+@media (max-width: 799px) {
+	.categoriesBages {
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 599px) {
+	.categoriesBages {
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(3, 1fr);
+	}
 }

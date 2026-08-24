@@ -1,0 +1,35 @@
+.headline {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	text-decoration: none;
+	color: var(--text-color);
+	width: fit-content;
+	margin-bottom: var(--headline-gap);
+}
+
+.headline h2 {
+	font-size: 30px;
+	font-weight: 600;
+	font-family: Unbounded;
+}
+
+.headline svg {
+	height: 35px;
+	width: 35px;
+}
+
+@media (max-width: 599px) {
+	.headline {
+		margin-bottom: var(--headline-gap-mobile);
+	}
+
+	.headline h2 {
+		font-size: 22px;
+	}
+
+	.headline svg {
+		height: 25px;
+		width: 25px;
+	}
+}

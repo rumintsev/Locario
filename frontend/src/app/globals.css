@@ -9,6 +9,7 @@
 	--swamp-green-hr: #4D553C;
 	--orange: #F5B637;
 	--button-bg: #F7F7F7;
+	--dark-brown: #311B15;
 
 	--side-padding: 16px;
 	--header-height: 60px;
@@ -17,6 +18,7 @@
 	--header-margin: 16px;
 	--opacity-percent: 0.7;
 	--headline-gap: 30px;
+	--headline-gap-mobile: 20px;
 }
 
 @font-face {
