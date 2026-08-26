@@ -15,7 +15,7 @@ frontend/src/components/archive
 frontend/src/styles
 
 # dependencies
-/.pnp
+**/.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -27,11 +27,11 @@ frontend/src/styles
 /coverage
 
 # next.js
-/.next/
-/out/
+**/.next
+**/out/
 
 # production
-/build
+**/build
 
 # misc
 *.pem
