@@ -10,13 +10,15 @@
 	--orange: #F5B637;
 	--button-bg: #F7F7F7;
 	--dark-brown: #311B15;
+	--bullet-color: #CDCDCD;
+	--link-button: #FBF7F0;
 
 	--side-padding: 16px;
 	--header-height: 60px;
 	--page-width: 1000px;
 	--footer-margin: 60px;
 	--header-margin: 16px;
-	--opacity-percent: 0.7;
+	--opacity-percent: 0.85;
 	--headline-gap: 30px;
 	--headline-gap-mobile: 20px;
 }

@@ -1,0 +1,190 @@
+.collectionPage {
+	display: flex;
+	justify-content: center;
+	padding: 0 var(--side-padding);
+}
+
+.collectionPageContent {
+	max-width: 800px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	position: relative;
+}
+
+.bookmark {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.collectionPage h1 {
+	font-family: Unbounded;
+	font-size: 30px;
+	font-weight: 700;
+	margin-right: 30px;
+}
+
+.tags {
+	display: flex;
+	gap: 10px;
+}
+
+.authorBar,
+.authorBar div {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.authorBar svg {
+	height: 24px;
+	width: 24px;
+}
+
+.authorBar span {
+	width: 3px;
+	height: 3px;
+	background-color: var(--text-to-read);
+	border-radius: 50%;
+}
+
+.collectionPage p {
+	color: var(--text-to-read);
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	margin-top: 10px;
+}
+
+.item {
+	display: flex;
+	gap: 20px;
+	position: relative;
+}
+
+.bookmark {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.itemDescription {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.itemName {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.itemName h2 {
+	font-size: 20px;
+	font-weight: 500;
+	font-family: Unbounded;
+}
+
+.itemName h3 {
+	font-size: 16px;
+	font-weight: 500;
+	color: var(--text-to-read);
+	font-family: Unbounded;
+}
+
+.photoBlock {
+	display: flex;
+}
+
+.photoBlock .itemName {
+	display: none;
+}
+
+.photo,
+.photoDummy {
+	position: relative;
+	width: 200px;
+	height: fit-content;
+	flex-shrink: 0;
+	aspect-ratio: 3 / 4;
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+.photoDummy {
+	background-color: var(--bg-contrast);
+}
+
+.link {
+	background-color: var(--link-button);
+	color: var(--dark-brown);
+	text-decoration: none;
+	border-radius: 15px;
+	padding: 12px 24px;
+	cursor: pointer;
+	width: fit-content;
+}
+
+.item a:hover {
+	opacity: var(--opacity-percent);
+}
+
+.collections {
+	max-width: 832px;
+	margin: 60px auto 0;
+}
+
+@media (max-width: 599px) {
+	.collectionPage h1 {
+		font-size: 22px;
+	}
+
+	.collectionPageContent {
+		gap: 16px;
+	}
+
+	.authorBar>span {
+		display: none;
+	}
+
+	.authorBar {
+		flex-direction: column;
+		align-items: start;
+	}
+
+	.item {
+		flex-direction: column;
+	}
+
+	.photoBlock {
+		gap: 20px;
+		align-items: center;
+	}
+
+	.photoBlock .itemName {
+		display: flex;
+	}
+
+	.itemDescription .itemName {
+		display: none;
+	}
+
+	.photo,
+	.photoDummy {
+		width: 124px;
+	}
+
+	.link {
+		width: 100%;
+		text-align: center;
+	}
+
+	.collections {
+		margin: 40px auto 0;
+	}
+}

@@ -9,14 +9,8 @@ frontend/README.md
 backend/src/controllers/seo.controller.ts
 backend/src/routes/seo.routes.ts
 docker/init.sql
-frontend/src/app/privacy
 frontend/src/app/sitemap.js
 frontend/src/app/robots.txt
-frontend/src/app/all
-frontend/src/app/articles
-frontend/src/app/cities
-frontend/src/app/collections
-frontend/src/app/places
 frontend/src/components/archive
 frontend/src/styles
 

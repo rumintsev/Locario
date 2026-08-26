@@ -4,7 +4,7 @@ import { getItemsById, getItemsByIds } from './tools';
 interface CollectionBase {
 	id: number;
 	name: string;
-	type: "places" | "cities";
+	type: "places" | "cities" | 'countries';
 	updateddate: string; // 'YYYY-MM-DD'
 	cards_count: number;
 }
@@ -45,7 +45,7 @@ export async function getCollectionFull(req: Request, res: Response) {
 			FROM collections c
 			LEFT JOIN LATERAL (
 					SELECT json_agg(
-							json_build_object('id', t.id, 'name', t.name, 'slug', t.slug) 
+							json_build_object('id', t.id, 'name', t.name, 'slug', t.slug, 'text_color', t.text_color, 'bg_color', t.bg_color) 
 							ORDER BY pt.position
 					) AS items
 					FROM collection_tags pt
@@ -104,6 +104,23 @@ export async function getCollectionFull(req: Request, res: Response) {
 							) ph2 ON true
 							WHERE cc.collection_id = c.id
 								AND ci.visibility = true
+
+							UNION ALL
+
+							-- countries
+							SELECT
+									ccnt.position AS entity_position,
+									json_build_object(
+											'id', co.id,
+											'photo', NULL,
+											'name', co.name,
+											'description', co.description,
+											'loc', NULL
+									) AS entity
+							FROM collection_countries ccnt
+							JOIN countries co ON co.id = ccnt.country_id
+							WHERE ccnt.collection_id = c.id
+								AND co.visibility = true
 					) combined
 			) items ON true
 			WHERE c.id = $1
@@ -139,6 +156,12 @@ const baseQuery = `
 									SELECT cc.position, cc.city_id, 'city'
 									FROM collection_cities cc
 									WHERE cc.collection_id = c.id
+
+									UNION ALL
+
+									SELECT ccnt.position, ccnt.country_id, 'country'
+									FROM collection_countries ccnt
+									WHERE ccnt.collection_id = c.id
 							) combined
 							JOIN LATERAL (
 									SELECT pp.url
@@ -173,6 +196,12 @@ const baseQuery = `
 							SELECT cc.city_id
 							FROM collection_cities cc
 							WHERE cc.collection_id = c.id
+
+							UNION ALL
+
+							SELECT ccnt.country_id
+							FROM collection_countries ccnt
+							WHERE ccnt.collection_id = c.id
 					) all_cards
 			) cnt ON true
 			WHERE

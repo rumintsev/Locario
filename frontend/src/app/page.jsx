@@ -6,9 +6,9 @@ import styles from './page.module.css'
 
 import Hero from '@/_components/Hero';
 import Categories from '@/_components/Categories';
-import Collections from '@/_components/Collections';
-import Articles from '@/_components/Articles';
-import Places from '@/_components/Places';
+import Collections from '@/components/Collections';
+import Articles from '@/components/Articles';
+import Cards from '@/components/Cards';
 import EmailSubscribe from '@/_components/EmailSubscribe';
 
 
@@ -29,9 +29,28 @@ export default async function MainPage() {
 			<div className={styles.mainPage}>
 				<Hero />
 				<Categories />
-				<Collections />
-				<Articles />
-				<Places />
+				<Collections
+					headline='Подборки'
+					link='/'
+					endpoint='/collections/short/1,2,3,4'
+				/>
+				<Articles
+					headline='Полезное'
+					link='/'
+					endpoint='/articles/short/1,2,3,4'
+				/>
+				<Cards
+					headline='Хорошие места'
+					link='/'
+					endpoint='/places/short/1,2,3,4'
+					type='place'
+				/>
+				<Cards
+					headline='Интересные города'
+					link='/'
+					endpoint='/cities/short/17,18,19,20'
+					type='city'
+				/>
 				<EmailSubscribe />
 			</div >
 		</>

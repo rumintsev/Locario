@@ -72,7 +72,7 @@
 	opacity: var(--opacity-percent);
 }
 
-.bottomBlock img {
+.bottomBlock .photo {
 	display: none;
 }
 
@@ -101,29 +101,27 @@
 		border-radius: 25px;
 	}
 
-	.heroContent img {
-		width: 180px;
-	}
-
-	.heroContent p {
-		font-size: 16px;
-	}
-
 	.tags a {
 		font-size: 14px;
 		padding: 6px 10px;
-	}
-
-	.bottomBlock {
-		display: flex;
 	}
 
 	.heroRight {
 		display: none;
 	}
 
+	.bottomBlock {
+		display: flex;
+	}
+
+	.bottomBlock .photo {
+		display: flex;
+		align-items: center;
+	}
+
 	.bottomBlock img {
 		display: block;
 		width: 120px;
+		height: auto;
 	}
 }

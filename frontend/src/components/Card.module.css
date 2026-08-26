@@ -1,9 +1,9 @@
-.place {
+.card {
 	display: flex;
 	position: relative;
 	gap: 15px;
 	container-type: inline-size;
-	container-name: place;
+	container-name: card;
 }
 
 .bookmark {
@@ -17,7 +17,7 @@
 .photoDummy {
 	position: relative;
 	aspect-ratio: 3 / 4;
-	width: 140px;
+	min-width: 140px;
 	border-radius: 15px;
 	overflow: hidden;
 }
@@ -26,7 +26,7 @@
 	background-color: var(--bg-contrast);
 }
 
-.placeDescription {
+.cardDescription {
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
@@ -48,14 +48,14 @@
 	border-radius: 10px;
 }
 
-.placeDescription a {
+.cardDescription a {
 	color: var(--text-color);
 	font-size: 18px;
 	font-weight: 500;
 	text-decoration: none;
 }
 
-.placeDescription a:hover {
+.card a:hover {
 	opacity: var(--opacity-percent);
 }
 
@@ -64,16 +64,16 @@
 	color: var(--text-to-read);
 }
 
-@container place (max-width: 489px) {
+@container card (max-width: 489px) {
 
 	.photo,
 	.photoDummy {
-		width: 124px;
+		min-width: 124px;
 	}
 }
 
 @media (max-width: 799px) {
-	@container place (max-width: 767px) {
+	@container card (max-width: 767px) {
 
 		.photo,
 		.photoDummy {
@@ -81,14 +81,14 @@
 		}
 	}
 
-	@container place (max-width: 567px) {
+	@container card (max-width: 567px) {
 
 		.photo,
 		.photoDummy {
 			width: 105px;
 		}
 
-		.placeDescription a {
+		.cardDescription a {
 			font-size: 16px;
 		}
 

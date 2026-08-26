@@ -29,22 +29,24 @@ export async function getCityFull(req: Request, res: Response) {
 					c.description,
 					c.article,
 					c.updateddate::text AS updateddate,
+					co.name AS loc,
 					COALESCE(photos.urls, ARRAY[]::text[]) AS photo,
 					COALESCE(tags.items, '[]'::json) AS tags
 			FROM cities c
+			JOIN countries co ON co.id = c.country_id
 			LEFT JOIN LATERAL (
 					SELECT array_agg(cp.url ORDER BY cp.position, cp.id) AS urls
 					FROM city_photos cp
 					WHERE cp.city_id = c.id
 			) photos ON true
 			LEFT JOIN LATERAL (
-					SELECT json_agg(json_build_object('id', t.id, 'name', t.name, 'slug', t.slug) ORDER BY pt.position) AS items
+					SELECT json_agg(json_build_object('id', t.id, 'name', t.name, 'slug', t.slug, 'text_color', t.text_color, 'bg_color', t.bg_color) ORDER BY pt.position) AS items
 					FROM city_tags pt
 					JOIN tags t ON t.id = pt.tag_id
 					WHERE pt.city_id = c.id
 			) tags ON true
 			WHERE c.id = $1
-					AND p.visibility = true;
+					AND c.visibility = true;
 		`;
 	getItemsById<CityFullResponse>(req, res, path, query);
 }
@@ -57,7 +59,7 @@ const baseQuery = `
 			photo.url AS photo,
 			CASE 
 				WHEN tag.id IS NULL THEN NULL 
-				ELSE json_build_object('id', tag.id, 'name', tag.name, 'slug', tag.slug) 
+				ELSE json_build_object('id', tag.id, 'name', tag.name, 'slug', tag.slug, 'text_color', tag.text_color, 'bg_color', tag.bg_color) 
 			END AS tag
 		FROM cities c
 		LEFT JOIN LATERAL (
@@ -67,7 +69,7 @@ const baseQuery = `
 			LIMIT 1
 		) photo ON true
 		LEFT JOIN LATERAL (
-			SELECT t.id, t.name, t.slug
+			SELECT t.id, t.name, t.slug, t.text_color, t.bg_color
 			FROM city_tags pt
 			JOIN tags t ON t.id = pt.tag_id
 			WHERE pt.city_id = c.id AND pt.position = 1

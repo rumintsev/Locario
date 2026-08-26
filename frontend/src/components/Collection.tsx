@@ -11,7 +11,7 @@ import styles from './Collection.module.css'
 interface Collection {
 	id: number;
 	name: string;
-	type: "places" | "cities";
+	type: "places" | "cities" | 'countries';
 	updateddate: string; // 'YYYY-MM-DD'
 	cards_count: number;
 	photos: string[];
@@ -31,30 +31,23 @@ export default function Collection({ collection }: { collection: Collection }) {
 
 				<BookmarkButton className={styles.bookmark} />
 
-				<div className={styles.photos}>
+				<Link
+					href={`/collections/${collection.id}`}
+					className={styles.photos}
+				>
 					{collection.photos.length >= 2 ? (
-						<>
+						collection.photos.map((photo) => (
 							<div className={styles.photoGrid}>
 								<div className={styles.photo}>
 									<Image
-										src={`/img/places/${collection.photos[0]}`}
+										src={`/img/${collection.type}/${photo}`}
 										alt='First collection image'
 										fill
 										sizes="150px, 190px"
 									/>
 								</div>
 							</div>
-							<div className={styles.photoGrid}>
-								<div className={styles.photo}>
-									<Image
-										src={`/img/places/${collection.photos[1]}`}
-										alt='Second collection image'
-										fill
-										sizes="150px, 190px"
-									/>
-								</div>
-							</div>
-						</>
+						))
 					) : (
 						<>
 							<div className={styles.photoGrid}>
@@ -65,7 +58,7 @@ export default function Collection({ collection }: { collection: Collection }) {
 							</div>
 						</>
 					)}
-				</div>
+				</Link>
 
 				<div className={styles.collectionDescription}>
 					{collection.tag && (

@@ -26,20 +26,30 @@ const ArticlesSchema = z.array(z.object({
 
 type Articles = z.infer<typeof ArticlesSchema>;
 
-export default async function Articles() {
+export default async function Articles({
+	headline,
+	link,
+	endpoint,
+	className,
+}: {
+	headline: string,
+	link?: string,
+	endpoint: string,
+	className?: string,
+}) {
 
-	const result = await serverFetch('/articles/short/1,2,3,4', ArticlesSchema);
+	const result = await serverFetch(endpoint, ArticlesSchema);
 
 	const articles = result.success ? result.data : [];
 	const hasError = !result.success;
 	if (hasError) console.error(result.error)
 
 	return (
-		<div className={styles.articles}>
+		<div className={`${styles.articles} ${className}`}>
 			<div className={styles.articlesContent}>
 
-				<Headline headline="Полезное" link="/" />
-				
+				<Headline headline={headline} link={link} />
+
 				{articles.length > 0 ? (
 					<div className={styles.articlesGrid}>
 						{articles.map((article) => (

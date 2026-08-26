@@ -14,6 +14,10 @@
 	font-family: Unbounded;
 }
 
+.headline:hover {
+	opacity: var(--opacity-percent);
+}
+
 .headline svg {
 	height: 35px;
 	width: 35px;

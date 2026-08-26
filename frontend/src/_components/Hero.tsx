@@ -48,14 +48,22 @@ export default function Hero() {
 							</div>
 						</div>
 
-						<Image src={heroImg} alt="Hero" />
+						<div className={styles.photo}>
+							<Image
+								src={heroImg}
+								alt="Hero"
+							/>
+						</div>
 
 					</div>
 
 				</div>
 
 				<div className={styles.heroRight}>
-					<Image src={heroImg} alt="Hero" />
+					<Image
+						src={heroImg}
+						alt="Hero"
+					/>
 				</div>
 			</div>
 		</div>

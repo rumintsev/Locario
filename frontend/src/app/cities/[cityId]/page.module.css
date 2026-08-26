@@ -1,0 +1,139 @@
+.cityPage {
+	display: flex;
+	justify-content: center;
+	padding: 0 var(--side-padding);
+}
+
+.cityPageContent {
+	max-width: 800px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	position: relative;
+}
+
+.bookmark {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.nameBlock {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.nameBlock h1 {
+	font-family: Unbounded;
+	font-size: 30px;
+	font-weight: 700;
+	margin-right: 30px;
+}
+
+.nameBlock h2 {
+	font-family: Unbounded;
+	color: var(--text-to-read);
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.tags {
+	display: flex;
+	gap: 10px;
+}
+
+.authorBar {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.authorBar svg {
+	height: 24px;
+	width: 24px;
+}
+
+.authorBar span {
+	width: 3px;
+	height: 3px;
+	background-color: var(--text-to-read);
+	border-radius: 50%;
+}
+
+.cityPage p {
+	color: var(--text-to-read);
+}
+
+.descriptionBlock {
+	display: flex;
+	gap: 20px;
+}
+
+.photos {
+	display: flex;
+	gap: 10px;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	width: 320px;
+	flex-shrink: 0;
+}
+
+.photos:has(.photo:only-child) {
+	justify-content: end;
+}
+
+.photo {
+	flex: 0 0 190px;
+	scroll-snap-align: start;
+	position: relative;
+	aspect-ratio: 3 / 4;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.cities {
+	max-width: 832px;
+	margin: 60px auto 0;
+}
+
+@media (max-width: 799px) {
+	.photos {
+		width: 295px;
+	}
+}
+
+@media (max-width: 599px) {
+	.cityPageContent {
+		gap: 16px;
+	}
+
+	.nameBlock {
+		gap: 6px;
+	}
+
+	.cityPage h1 {
+		font-size: 22px;
+	}
+
+	.descriptionBlock {
+		flex-direction: column;
+	}
+
+	.photos:has(.photo:only-child) {
+		justify-content: start;
+	}
+
+	.photos {
+		width: calc(100vw - 2 * var(--side-padding));
+	}
+
+	.photo {
+		flex: 0 0 124px;
+	}
+
+	.cities {
+		margin: 40px auto 0;
+	}
+}

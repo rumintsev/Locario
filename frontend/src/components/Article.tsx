@@ -36,18 +36,24 @@ export default function Article({ article }: { article: Article }) {
 				<Tag className={styles.tag} tag={article.tag} />
 			}
 			{article.photo ? (
-				<div className={styles.photo}>
+				<Link
+					href={`/articles/${article.id}`}
+					className={styles.photo}
+				>
 					<Image
 						src={`/img/articles/${article.photo}`}
 						alt='Article image'
 						fill
 						sizes="660px, 315px"
 					/>
-				</div>
+				</Link>
 			) : (
-				<div className={styles.photoDummy} />
+				<Link
+					href={`/articles/${article.id}`}
+					className={styles.photoDummy}
+				/>
 			)}
-			<Link href={`articles/${article.id}`} className={styles.name}>
+			<Link href={`/articles/${article.id}`} className={styles.name}>
 				{article.name}
 			</Link>
 			<p className={styles.extra}>{new Date(

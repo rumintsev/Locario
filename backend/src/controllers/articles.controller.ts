@@ -36,7 +36,7 @@ export async function getArticleFull(req: Request, res: Response) {
 					WHERE ap.article_id = a.id
 			) photos ON true
 			LEFT JOIN LATERAL (
-					SELECT json_agg(json_build_object('id', t.id, 'name', t.name, 'slug', t.slug) ORDER BY at.position) AS items
+					SELECT json_agg(json_build_object('id', t.id, 'name', t.name, 'slug', t.slug, 'text_color', t.text_color, 'bg_color', t.bg_color) ORDER BY at.position) AS items
 					FROM article_tags at
 					JOIN tags t ON t.id = at.tag_id
 					WHERE at.article_id = a.id

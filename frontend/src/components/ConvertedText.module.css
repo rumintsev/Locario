@@ -1,0 +1,40 @@
+.text {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.text h2:first-child {
+	margin-top: 0;
+}
+
+.text h2 {
+	font-family: Unbounded;
+	font-size: 20px;
+	font-weight: 700;
+	margin-top: 15px;
+}
+
+.bulletItem {
+	display: flex;
+	gap: 10px;
+}
+
+.bullet {
+	width: 6px;
+	height: 6px;
+	min-width: 6px;
+	margin-top: 10px;
+	border-radius: 50%;
+	background-color: var(--bullet-color);
+}
+
+.text b {
+	font-weight: 600;
+}
+
+@media (max-width: 599px) {
+	.text {
+		margin-bottom: 40px;
+	}
+}

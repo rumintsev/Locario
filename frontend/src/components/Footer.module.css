@@ -30,6 +30,11 @@
 	font-size: 28px;
 }
 
+.logo svg {
+	height: 28px;
+	width: 28px;
+}
+
 .footerTop {
 	display: flex;
 	gap: 85px;

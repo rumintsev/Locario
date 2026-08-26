@@ -1,25 +1,23 @@
-.articles {
+.cards {
 	padding: 0 var(--side-padding);
 	display: flex;
 	justify-content: center;
 }
 
-.articlesContent {
+.cardsContent {
 	max-width: var(--page-width);
 	width: 100%;
 }
 
-.articlesGrid {
+.cardsGrid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr 1fr;
 	gap: 30px 20px;
 }
 
-@media (max-width: 599px) {
-	.articlesGrid {
-		display: flex;
-		flex-direction: column;
+@media (max-width: 799px) {
+	.cardsGrid {
+		grid-template-columns: 1fr;
 		gap: 20px;
 	}
 }

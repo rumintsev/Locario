@@ -43,7 +43,7 @@
 	font-size: 18px;
 }
 
-.name:hover {
+.article a:hover {
 	opacity: var(--opacity-percent);
 }
 
@@ -55,12 +55,14 @@
 	gap: 6px;
 }
 
-@container article (max-width: 567px) {
-	.name {
-		font-size: 16px;
-	}
+@media (max-width: 599px) {
+	@container article (max-width: 567px) {
+		.name {
+			font-size: 16px;
+		}
 
-	.extra {
-		font-size: 12px;
+		.extra {
+			font-size: 12px;
+		}
 	}
 }
