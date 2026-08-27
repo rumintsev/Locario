@@ -1,5 +1,3 @@
-import { z } from 'zod';
-
 // ui
 import Headline from "@/components/ui/Headline";
 import Error from "@/components/ui/Error";
@@ -9,24 +7,7 @@ import styles from './Collections.module.css'
 
 import Collection from "@/components/Collection";
 import { serverFetch } from "@/lib/serverFetch";
-
-const CollectionsSchema = z.array(z.object({
-	id: z.number(),
-	name: z.string(),
-	type: z.enum(["places", "cities", 'countries']),
-	updateddate: z.string(), // 'YYYY-MM-DD'
-	cards_count: z.number(),
-	photos: z.array(z.string()),
-	tag: z.object({
-		id: z.number(),
-		name: z.string(),
-		slug: z.string(),
-		text_color: z.string(),
-		bg_color: z.string()
-	}).nullable()
-}));
-
-type Collections = z.infer<typeof CollectionsSchema>;
+import { CollectionsSchema } from '@/schemas/schema'
 
 export default async function Collections({
 	headline,

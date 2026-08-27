@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { notFound } from 'next/navigation';
 import { serverFetch } from '@/lib/serverFetch';
 import Image from 'next/image';
-import Collections from '@/components/Collections';
+import Collections from '@/components/CollectionsServer';
 import BookmarkButton from '@/components/ui/BookmarkButton';
 
 // css

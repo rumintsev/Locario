@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { notFound } from 'next/navigation';
 import { serverFetch } from '@/lib/serverFetch';
 import Image from 'next/image';
-import Articles from '@/components/Articles';
+import Articles from '@/components/ArticlesServer';
 import ConvertedText from '@/components/ConvertedText';
 
 // css

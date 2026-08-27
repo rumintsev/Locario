@@ -1,0 +1,36 @@
+.feedPage {
+	display: flex;
+	justify-content: center;
+	padding: 0 var(--side-padding);
+}
+
+.feedPageContent {
+	max-width: var(--page-width);
+	width: 100%;
+}
+
+.pageName {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	margin-bottom: 10px;
+}
+
+.pageName h1 {
+	font-family: Unbounded;
+	font-weight: 800;
+	font-size: 30px;
+}
+
+.pageName svg {
+	color: var(--text-color);
+	height: 35px;
+	width: 35px;
+}
+
+.feedDescription {
+	font-size: 18px;
+	font-weight: 500;
+	color: var(--text-gray);
+	margin-bottom: 25px;
+}

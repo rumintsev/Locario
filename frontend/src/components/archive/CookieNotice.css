@@ -1,0 +1,38 @@
+.cookie-notice {
+  position: fixed;
+  bottom: 5px;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: var(--bg-color);
+  color: var(--grey);
+  padding: 5px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-size: 14px;
+}
+
+.cookie-notice span {
+  white-space: nowrap;
+}
+
+.cookie-notice button {
+  font-size: 12px;
+  background-color: var(--bg-color);
+  color: var(--blue);
+  border: 1px solid var(--blue);
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s background-color;
+}
+
+.cookie-notice button:hover {
+  background-color: var(--blue);
+  color: var(--bg-color);
+
+}

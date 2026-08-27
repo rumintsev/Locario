@@ -1,5 +1,3 @@
-import { z } from 'zod';
-
 // css
 import styles from './Cards.module.css';
 
@@ -9,30 +7,14 @@ import Error from "@/components/ui/Error";
 
 import Card from "@/components/Card";
 import { serverFetch } from "@/lib/serverFetch";
-
-const CardsSchema = z.array(z.object({
-	id: z.number(),
-	name: z.string(),
-	rate: z.number().nullable().optional(),
-	updateddate: z.string(), // 'YYYY-MM-DD'
-	photo: z.string().nullable(),
-	tag: z.object({
-		id: z.number(),
-		name: z.string(),
-		slug: z.string(),
-		text_color: z.string(),
-		bg_color: z.string(),
-	}).nullable(),
-}));
-
-type Cards = z.infer<typeof CardsSchema>
+import { CardsSchema } from '@/schemas/schema';
 
 export default async function Cards({
 	headline,
 	link,
 	endpoint,
 	className,
-	type
+	type,
 }: {
 	headline: string,
 	link?: string,
@@ -40,12 +22,10 @@ export default async function Cards({
 	className?: string,
 	type: 'place' | 'city',
 }) {
-
 	const result = await serverFetch(endpoint, CardsSchema);
-
 	const cards = result.success ? result.data : [];
 	const hasError = !result.success;
-	if (hasError) console.error(result.error)
+	if (hasError) console.error(result.error);
 
 	return (
 		<div className={`${styles.cards} ${className}`}>

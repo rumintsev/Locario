@@ -10,9 +10,6 @@ backend/src/controllers/seo.controller.ts
 backend/src/routes/seo.routes.ts
 docker/init.sql
 frontend/src/app/sitemap.js
-frontend/src/app/robots.txt
-frontend/src/components/archive
-frontend/src/styles
 
 # dependencies
 **/.pnp

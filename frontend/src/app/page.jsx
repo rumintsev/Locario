@@ -6,9 +6,9 @@ import styles from './page.module.css'
 
 import Hero from '@/_components/Hero';
 import Categories from '@/_components/Categories';
-import Collections from '@/components/Collections';
-import Articles from '@/components/Articles';
-import Cards from '@/components/Cards';
+import Collections from '@/components/CollectionsServer';
+import Articles from '@/components/ArticlesServer';
+import Cards from '@/components/CardsServer';
 import EmailSubscribe from '@/_components/EmailSubscribe';
 
 

@@ -140,10 +140,10 @@ export default function Header() {
 						<LogoIcon />
 						<span>Locario</span>
 					</Link>
-					{/* <Link
+					<Link
 						href={'/feed'}
 						style={{ display: !isSearchOpen ? 'block' : 'none' }}
-					>Лента</Link> */}
+					>Лента</Link>
 				</nav>
 
 				<div className={styles.search}>

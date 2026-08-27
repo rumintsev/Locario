@@ -36,8 +36,8 @@ export default function Collection({ collection }: { collection: Collection }) {
 					className={styles.photos}
 				>
 					{collection.photos.length >= 2 ? (
-						collection.photos.map((photo) => (
-							<div className={styles.photoGrid}>
+						collection.photos.map((photo, i) => (
+							<div className={styles.photoGrid} key={i}>
 								<div className={styles.photo}>
 									<Image
 										src={`/img/${collection.type}/${photo}`}

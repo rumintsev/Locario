@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /privacy
+Disallow: /contact
+
+Allow: /
+
+Sitemap: https://locario.ru/sitemap.xml
