@@ -33,16 +33,16 @@ export default function Hero() {
 						<div className={styles.tagsBlock}>
 							<p>Популярно сейчас:</p>
 							<div className={styles.tags}>
-								<Link href='/tag/'>
+								<Link href='/feed?tags=nature'>
 									Природа
 								</Link>
-								<Link href='/tag/'>
+								<Link href='/feed?tags=health'>
 									Здоровье
 								</Link>
-								<Link href='/tag/'>
+								<Link href='/feed?tags=petersburg'>
 									Петербург
 								</Link>
-								<Link href='/tag/'>
+								<Link href='/feed?tags=belarus'>
 									Беларусь
 								</Link>
 							</div>

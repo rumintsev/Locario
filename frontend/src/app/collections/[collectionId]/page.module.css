@@ -19,9 +19,9 @@
 }
 
 .collectionPage h1 {
-	font-family: Unbounded;
+	font-family: var(--unbounded), sans-serif;
 	font-size: 30px;
-	font-weight: 700;
+	font-weight: 500;
 	margin-right: 30px;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .authorBar,
-.authorBar div {
+.authorBar .authorBlock {
 	display: flex;
 	align-items: center;
 	gap: 12px;
@@ -42,7 +42,7 @@
 	width: 24px;
 }
 
-.authorBar span {
+.dotSpan {
 	width: 3px;
 	height: 3px;
 	background-color: var(--text-to-read);
@@ -87,14 +87,14 @@
 .itemName h2 {
 	font-size: 20px;
 	font-weight: 500;
-	font-family: Unbounded;
+	font-family: var(--unbounded), sans-serif;
 }
 
 .itemName h3 {
 	font-size: 16px;
 	font-weight: 500;
 	color: var(--text-to-read);
-	font-family: Unbounded;
+	font-family: var(--unbounded), sans-serif;
 }
 
 .photoBlock {
@@ -148,7 +148,7 @@
 		gap: 16px;
 	}
 
-	.authorBar>span {
+	.authorBar>.dotSpan {
 		display: none;
 	}
 

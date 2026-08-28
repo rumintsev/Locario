@@ -1,3 +1,9 @@
+.menuContainer {
+	padding: 0 var(--side-padding);
+	display: flex;
+	justify-content: center;
+}
+
 .menu {
 	background-color: var(--bg-contrast);
 	padding: 20px;
@@ -5,6 +11,8 @@
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
+	max-width: var(--page-width);
+	width: 100%;
 }
 
 .categoriesBar {
@@ -12,7 +20,8 @@
 	gap: 20px;
 }
 
-.categoriesBar button {
+.categoriesBar button,
+.moreTags {
 	width: fit-content;
 	background: none;
 	border: none;
@@ -46,6 +55,7 @@
 .checkboxes label {
 	display: flex;
 	gap: 8px;
+	align-items: center;
 }
 
 .checkboxes input {
@@ -86,4 +96,43 @@
 
 .checkboxes label span {
 	color: var(--text-to-read);
+}
+
+.content {
+	margin-top: 25px;
+	display: flex;
+	flex-direction: column;
+	gap: 35px;
+}
+
+.notFound {
+	padding: 0 var(--side-padding);
+	max-width: calc(var(--page-width) + var(--side-padding));
+	width: 100%;
+	margin: 0 auto;
+	font-weight: 500;
+	font-size: 18px;
+}
+
+@media (max-width: 599px) {
+	.categoriesBar {
+		gap: 16px;
+	}
+
+	.menu h3 {
+		font-size: 16px;
+	}
+
+	.checkboxes {
+		gap: 16px;
+	}
+
+	.categoriesBar button,
+	.moreTags {
+		font-size: 14px;
+	}
+
+	.checkboxes label span {
+		font-size: 14px;
+	}
 }

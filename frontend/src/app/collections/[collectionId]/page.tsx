@@ -83,12 +83,12 @@ export default async function CollectionPage({
 					)}
 
 					<p className={styles.authorBar}>
-						<div><LogoIcon /> Locario</div> <span /> <div>Обновлено: {new Date(
+						<span className={styles.authorBlock}><LogoIcon /> Locario</span> <span className={styles.dotSpan} /> <span className={styles.authorBlock}>Обновлено: {new Date(
 							collection.updateddate).toLocaleDateString('ru-RU', {
 								day: 'numeric',
 								month: 'long',
 								year: 'numeric',
-							}).replace(' г.', '')} <span /> {collection.items.length} карточек</div>
+							}).replace(' г.', '')} <span className={styles.dotSpan}/> {collection.items.length} карточек</span>
 					</p>
 
 					{collection.items.length > 0 && (

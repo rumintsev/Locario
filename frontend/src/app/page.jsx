@@ -31,23 +31,23 @@ export default async function MainPage() {
 				<Categories />
 				<Collections
 					headline='Подборки'
-					link='/'
+					link='/feed?types=collection'
 					endpoint='/collections/short/1,2,3,4'
 				/>
 				<Articles
 					headline='Полезное'
-					link='/'
+					link='/feed?types=article'
 					endpoint='/articles/short/1,2,3,4'
 				/>
 				<Cards
 					headline='Хорошие места'
-					link='/'
+					link='/feed?types=place'
 					endpoint='/places/short/1,2,3,4'
 					type='place'
 				/>
 				<Cards
 					headline='Интересные города'
-					link='/'
+					link='/feed?types=city'
 					endpoint='/cities/short/17,18,19,20'
 					type='city'
 				/>

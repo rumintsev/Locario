@@ -16,29 +16,29 @@ export default function Categories() {
 	return (
 		<div className={styles.categories}>
 			<div className={styles.categoriesContent}>
-				<Headline headline="Категории" link="/" />
+				<Headline headline="Категории" link="/feed" />
 				<div className={styles.categoriesBages}>
-					<Link href="/">
+					<Link href="/feed?tags=museum">
 						Музеи
 						<MuseumsIcon />
 					</Link>
-					<Link href="/">
+					<Link href="/feed?tags=family">
 						Семьёй
 						<FamilyIcon />
 					</Link>
-					<Link href="/">
+					<Link href="/feed?tags=cafe">
 						Кафе
 						<CupIcon />
 					</Link>
-					<Link href="/">
+					<Link href="/feed?tags=activity">
 						Активности
 						<FlagIcon />
 					</Link>
-					<Link href="/">
+					<Link href="/feed?tags=nature">
 						Природа
 						<LeafIcon />
 					</Link>
-					<Link href="/">
+					<Link href="/feed?tags=free">
 						Бесплатно
 						<WalletIcon />
 					</Link>

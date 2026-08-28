@@ -61,7 +61,7 @@ export type Collections = z.infer<typeof CollectionsSchema>;
 // search
 export const SearchParamsSchema = z.object({
 	q: z.string().optional(),
-	page: z.number().int().positive().optional(),
+	page: z.coerce.number().int().int().positive().optional(),
 	types: z
 		.string()
 		.transform((val) => (val ? val.split(",") : []))

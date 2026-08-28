@@ -22,18 +22,18 @@
 .nameBlock {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
+	gap: 2px;
 }
 
 .placePage h1 {
-	font-family: Unbounded;
+	font-family: var(--unbounded), sans-serif;
 	font-size: 30px;
-	font-weight: 700;
+	font-weight: 500;
 	margin-right: 30px;
 }
 
 .nameBlock h2 {
-	font-family: Unbounded;
+	font-family: var(--unbounded), sans-serif;
 	color: var(--text-to-read);
 	font-size: 20px;
 	font-weight: 500;

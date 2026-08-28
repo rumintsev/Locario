@@ -48,7 +48,7 @@
 }
 
 .logo span {
-	font-family: Staatliches;
+	font-family: var(--staatliches), sans-serif;
 	font-size: 28px;
 	color: var(--text-color);
 }
