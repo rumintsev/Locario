@@ -4,4 +4,9 @@
 	font-size: 12px;
 	font-weight: 600;
 	width: fit-content;
+	text-decoration: none;
+}
+
+.tag:hover {
+	opacity: var(--opacity-percent);
 }

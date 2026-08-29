@@ -47,6 +47,7 @@ export default async function FeedPage({ searchParams }: {
 				initialTypes={initial.types || []}
 				initialTags={initial.tags || []}
 				initialResult={searchResult.data}
+				initialQuery={initial.q || ''}
 			/>
 			) : (
 				<p style={{

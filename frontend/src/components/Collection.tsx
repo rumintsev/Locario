@@ -29,7 +29,10 @@ export default function Collection({ collection }: { collection: Collection }) {
 		<div className={styles.collectionComponent}>
 			<div className={styles.collection}>
 
-				<BookmarkButton className={styles.bookmark} />
+				<BookmarkButton
+					className={styles.bookmark}
+					itemInfo={{ id: collection.id, type: 'collection' }}
+				/>
 
 				<Link
 					href={`/collections/${collection.id}`}
@@ -65,7 +68,10 @@ export default function Collection({ collection }: { collection: Collection }) {
 						<Tag tag={collection.tag} />
 					)}
 
-					<Link href={`/collections/${collection.id}`}>{collection.name}</Link>
+					<Link
+						className={styles.name}
+						href={`/collections/${collection.id}`}
+					>{collection.name}</Link>
 					<p className={styles.extra}>
 						{collection.cards_count} карточек <span /> {new Date(
 							collection.updateddate).toLocaleDateString('ru-RU', {

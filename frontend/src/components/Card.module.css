@@ -48,14 +48,16 @@
 	border-radius: 10px;
 }
 
-.cardDescription a {
+.cardDescription .name {
 	color: var(--text-color);
 	font-size: 18px;
 	font-weight: 500;
 	text-decoration: none;
+	margin-right: 30px;
 }
 
-.card a:hover {
+.card .name:hover,
+.photo:hover {
 	opacity: var(--opacity-percent);
 }
 

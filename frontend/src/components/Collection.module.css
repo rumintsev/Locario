@@ -21,14 +21,14 @@
 	right: 0;
 }
 
-.collection a {
+.collection .name {
 	text-decoration: none;
 	color: var(--text-color);
 	font-weight: 500;
 	font-size: 18px;
 }
 
-.collection a:hover {
+.collection .name:hover {
 	opacity: var(--opacity-percent);
 }
 

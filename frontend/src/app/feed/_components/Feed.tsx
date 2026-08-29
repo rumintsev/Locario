@@ -20,8 +20,10 @@ import {
 	type Card,
 	type Article,
 	type Collection,
+	type Tag,
 	type types,
 } from "@/schemas/schema";
+import Tags from '@/components/Tags';
 
 const CATEGORIES: { label: string; slug: string }[] = [
 	{ label: 'Новинка', slug: 'new' },
@@ -67,7 +69,18 @@ function toCollection(item: SearchItem): Collection {
 	};
 }
 
+function toTag(item: SearchItem): Tag {
+	return {
+		id: item.id,
+		name: item.name,
+		slug: item.slug || '',
+		text_color: item.text_color || '',
+		bg_color: item.bg_color || '',
+	};
+}
+
 function Content(searchItems: SearchItem[]) {
+	const tags = searchItems.filter((item) => item.type === 'tag').map(toTag);
 	const collections = searchItems.filter((item) => item.type === 'collection').map(toCollection);
 	const articles = searchItems.filter((item) => item.type === 'article').map(toCardOrArticle);
 	const places = searchItems.filter((item) => item.type === 'place').map(toCardOrArticle);
@@ -76,30 +89,38 @@ function Content(searchItems: SearchItem[]) {
 	return (
 		searchItems.length > 0 ? (
 			<>
+				{tags.length > 0 &&
+					<Tags
+						headline='Категории'
+						tags={tags}
+					/>
+				}
 				{collections.length > 0 &&
 					<CollectionsClient
 						headline='Подборки'
 						collections={collections}
-					/>}
+					/>
+				}
 				{articles.length > 0 &&
 					<ArticlesClient
 						headline="Статьи"
 						articles={articles}
-					/>}
-
+					/>
+				}
 				{places.length > 0 &&
 					<CardsClient
 						headline="Места"
 						type="place"
 						cards={places}
-					/>}
-
+					/>
+				}
 				{cities.length > 0 &&
 					<CardsClient
 						headline="Города"
 						type="city"
 						cards={cities}
-					/>}
+					/>
+				}
 			</>
 		) : (
 			<h2 className={styles.notFound}>Ничего не нашлось</h2>
@@ -107,17 +128,21 @@ function Content(searchItems: SearchItem[]) {
 	)
 }
 
-export function Feed({ initialTypes, initialTags, initialResult }: {
-	initialTypes: types[];
-	initialTags: string[];
-	initialResult: SearchResult;
+export function Feed({ initialTypes, initialTags, initialResult, initialQuery }: {
+	initialTypes: types[],
+	initialTags: string[],
+	initialResult: SearchResult,
+	initialQuery: string;
 }) {
 	const router = useRouter();
 	const pathname = usePathname();
+	const urlSearchParams = useSearchParams();
 
 	const [selectedTags, setSelectedTags] = useState<string[]>(initialTags);
 	const [selectedTypes, setSelectedTypes] = useState<types[]>(initialTypes);
 	const [searchItems, setSearchItems] = useState<SearchItem[]>(initialResult.data);
+	const [searchQuery, setSearchQuery] = useState<string>(initialQuery);
+	const [isFullTags, setIsFullTags] = useState<boolean>(false);
 	const [pageParams, setPageParams] = useState<{
 		page: number,
 		totalPages: number,
@@ -125,7 +150,6 @@ export function Feed({ initialTypes, initialTags, initialResult }: {
 		page: initialResult.page,
 		totalPages: initialResult.totalPages,
 	});
-	const [isFullTags, setIsFullTags] = useState<boolean>(false);
 
 	const isFirstRender = useRef(true);
 
@@ -154,10 +178,28 @@ export function Feed({ initialTypes, initialTags, initialResult }: {
 	};
 
 	useEffect(() => {
-		const params = buildSearchParams({ types: selectedTypes, tags: selectedTags, page: pageParams.page });
+		const urlQuery = urlSearchParams.get('q') ?? '';
+		if (searchQuery !== urlQuery) {
+			setSearchQuery(urlQuery);
+			setPageParams(prev => ({ ...prev, page: 1 }))
+		}
+		const urlTag = urlSearchParams.get('tags') ?? '';
+		if (selectedTags.join(',') !== urlTag) {
+			setSelectedTags(urlTag === '' ? [] : [urlTag]);
+			setPageParams(prev => ({ ...prev, page: 1 }))
+		}
+	}, [urlSearchParams]);
+
+	useEffect(() => {
+		const params = buildSearchParams({
+			types: selectedTypes,
+			tags: selectedTags,
+			page: pageParams.page,
+			q: searchQuery,
+		});
 		const url = params ? `${pathname}?${params}` : pathname;
 		router.replace(url, { scroll: false });
-	}, [selectedTypes, selectedTags, pageParams.page]);
+	}, [selectedTypes, selectedTags, pageParams.page, searchQuery]);
 
 	useEffect(() => {
 		if (isFirstRender.current) {
@@ -168,7 +210,12 @@ export function Feed({ initialTypes, initialTags, initialResult }: {
 		let cancelled = false;
 		const timeout = setTimeout(async () => {
 			try {
-				const params = buildSearchParams({ types: selectedTypes, tags: selectedTags, page: pageParams.page });
+				const params = buildSearchParams({
+					types: selectedTypes,
+					tags: selectedTags,
+					page: pageParams.page,
+					q: searchQuery
+				});
 				const data = await clientFetch(`/search/full?${params}`);
 
 				if (cancelled) return;
@@ -191,10 +238,11 @@ export function Feed({ initialTypes, initialTags, initialResult }: {
 			cancelled = true;
 			clearTimeout(timeout);
 		}
-	}, [selectedTags, selectedTypes, pageParams.page]);
+	}, [selectedTags, selectedTypes, pageParams.page, searchQuery]);
 
 	function handlePageChange(i: number) {
 		setPageParams(prev => ({ ...prev, page: i }))
+		window.scrollTo({ top: 0, behavior: 'auto' })
 	}
 
 	function PageButtons({ page, totalPages }: { page: number, totalPages: number }) {
@@ -212,7 +260,7 @@ export function Feed({ initialTypes, initialTags, initialResult }: {
 			endPage = totalPages;
 		} else {
 			startPage = page - 1;
-			endPage = page + 1;
+			endPage = page + MAX_BUTTONS - 2;
 		}
 
 		const pageNumbers: React.ReactElement[] = [];
@@ -221,7 +269,7 @@ export function Feed({ initialTypes, initialTags, initialResult }: {
 			pageNumbers.push(
 				<button
 					key={i}
-					className={`pageNumber ${i === page ? 'active' : ''}`}
+					className={styles.pageNumber}
 					onClick={() => handlePageChange(i)}
 					disabled={i === page}
 				>
@@ -229,7 +277,26 @@ export function Feed({ initialTypes, initialTags, initialResult }: {
 				</button>
 			);
 		}
-		return pageNumbers;
+		return (
+			<div className={styles.pageToggler}>
+				<button
+					className={styles.prev}
+					onClick={() => handlePageChange(page - 1)}
+					disabled={page === 1}
+				>
+					<NextIcon />
+				</button>
+				{pageNumbers}
+				<button
+					className={styles.next}
+					onClick={() => handlePageChange(page + 1)}
+					disabled={page >= totalPages}
+				>
+					<NextIcon />
+				</button>
+			</div>
+		);
+
 	}
 
 	return (
@@ -289,18 +356,10 @@ export function Feed({ initialTypes, initialTags, initialResult }: {
 
 				{Content(searchItems)}
 
-				<div className={styles.pageToggler}>
-					<button className={styles.prev}>
-						<NextIcon />
-					</button>
-					{PageButtons({
-						page: pageParams.page,
-						totalPages: pageParams.totalPages,
-					})}
-					<button className={styles.next}>
-						<NextIcon />
-					</button>
-				</div>
+				{PageButtons({
+					page: pageParams.page,
+					totalPages: pageParams.totalPages,
+				})}
 
 			</div>
 

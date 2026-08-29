@@ -63,7 +63,10 @@ export default async function PlacePage({
 			<div className={styles.placePage}>
 				<div className={styles.placePageContent}>
 
-					<BookmarkButton className={styles.bookmark} />
+					<BookmarkButton
+						className={styles.bookmark}
+						itemInfo={{ id: place.id, type: 'place' }}
+					/>
 
 					<div className={styles.nameBlock}>
 						<h1>{place.name}</h1>

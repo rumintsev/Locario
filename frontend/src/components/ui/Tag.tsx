@@ -1,6 +1,8 @@
 // css
 import styles from './Tag.module.css'
 
+import Link from 'next/link';
+
 interface Tag {
 	id: number;
 	name: string;
@@ -11,11 +13,13 @@ interface Tag {
 
 export default function Tag({ tag, className }: { tag: Tag, className?: string }) {
 	return (
-		<div className={`${styles.tag} ${className}`} style={{
-			color: tag.text_color,
-			background: tag.bg_color
-		}}>
+		<Link
+			href={`/feed?tags=${tag.slug}`}
+			className={`${styles.tag} ${className}`} style={{
+				color: tag.text_color,
+				background: tag.bg_color
+			}}>
 			{tag.name.toLocaleUpperCase()}
-		</div>
+		</Link>
 	)
 }

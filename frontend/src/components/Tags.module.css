@@ -1,0 +1,22 @@
+.tags {
+	padding: 0 var(--side-padding);
+	display: flex;
+	justify-content: center;
+}
+
+.tagsContent {
+	max-width: var(--page-width);
+	width: 100%;
+}
+
+.tagsGrid {
+	display: flex;
+	gap: 10px;
+}
+
+@media (max-width: 799px) {
+	.tagsGrid {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+}

@@ -65,10 +65,6 @@ export async function getSearchShort(req: Request, res: Response) {
 
 		const result = await pool.query<SearchResultShort>(query, [q]);
 
-		if (result.rows.length === 0) {
-			return res.status(404).json({ error: 'No results found' });
-		}
-
 		res.json(result.rows);
 	} catch (error) {
 		if (error instanceof ValidationError) {
@@ -97,7 +93,9 @@ export async function getSearchFull(req: Request, res: Response) {
 			END AS tag,
 			p.updateddate::text AS updateddate,
 			NULL::collection_type AS collection_type,
-			NULL::int AS cards_count
+			NULL::int AS cards_count,
+			NULL::text AS text_color,
+			NULL::text AS bg_color
 		FROM places p
 		LEFT JOIN cities city ON city.id = p.city_id
 		LEFT JOIN LATERAL (
@@ -132,7 +130,9 @@ export async function getSearchFull(req: Request, res: Response) {
 			END AS tag,
 			ci.updateddate::text AS updateddate,
 			NULL::collection_type AS collection_type,
-			NULL::int AS cards_count
+			NULL::int AS cards_count,
+			NULL::text AS text_color,
+			NULL::text AS bg_color
 		FROM cities ci
 		LEFT JOIN countries country ON country.id = ci.country_id
 		LEFT JOIN LATERAL (
@@ -163,7 +163,9 @@ export async function getSearchFull(req: Request, res: Response) {
 			NULL::jsonb AS tag,
 			co.updateddate::text AS updateddate,
 			NULL::collection_type AS collection_type,
-			NULL::int AS cards_count
+			NULL::int AS cards_count,
+			NULL::text AS text_color,
+			NULL::text AS bg_color
 		FROM countries co
 		WHERE co.visibility = true
 			AND ($1::text IS NULL OR co.name ILIKE '%' || $1 || '%')
@@ -181,7 +183,9 @@ export async function getSearchFull(req: Request, res: Response) {
 			END AS tag,
 			col.updateddate::text AS updateddate,
 			col.type AS collection_type,
-			COALESCE(cnt.cards_count, 0) AS cards_count
+			COALESCE(cnt.cards_count, 0) AS cards_count,
+			NULL::text AS text_color,
+			NULL::text AS bg_color
 		FROM collections col
 		LEFT JOIN LATERAL (
 			SELECT json_agg(found.photo_url ORDER BY found.entity_position)::jsonb AS urls
@@ -213,7 +217,7 @@ export async function getSearchFull(req: Request, res: Response) {
 			WHERE cot.collection_id = col.id AND cot.position = 1
 			LIMIT 1
 		) coltag ON true
-		LEFT JOIN LATERAL (                                        -- добавили
+		LEFT JOIN LATERAL (
 			SELECT COUNT(*)::int AS cards_count
 			FROM (
 				SELECT cp.place_id AS entity_id
@@ -248,7 +252,9 @@ export async function getSearchFull(req: Request, res: Response) {
 			END AS tag,
 			a.updateddate::text AS updateddate,
 			NULL::collection_type AS collection_type,
-			NULL::int AS cards_count
+			NULL::int AS cards_count,
+			NULL::text AS text_color,
+			NULL::text AS bg_color
 		FROM articles a
 		LEFT JOIN LATERAL (
 			SELECT ap.url
@@ -280,9 +286,11 @@ export async function getSearchFull(req: Request, res: Response) {
 			NULL::jsonb AS tag,
 			NULL::text AS updateddate,
 			NULL::collection_type AS collection_type,
-			NULL::int AS cards_count
+			NULL::int AS cards_count,
+			t.text_color, t.bg_color
 		FROM tags t
-		WHERE ($1::text IS NULL OR t.name ILIKE '%' || $1 || '%')
+		WHERE $1::text IS NOT NULL AND $1 != ''
+			AND t.name ILIKE '%' || $1 || '%'
 			AND $2::text[] IS NULL
 	)
 	SELECT *, COUNT(*) OVER()::int AS total_count
@@ -295,7 +303,8 @@ export async function getSearchFull(req: Request, res: Response) {
 	try {
 		const q = (req.query.q as string)?.trim() || null;
 		const page = parseInt(req.query.page as string) || 1;
-		const limit = parseInt(req.query.limit as string) || 10;
+		// const limit = parseInt(req.query.limit as string) || 10;
+		const limit = 20;
 
 		const toArray = (v: unknown): string[] | null =>
 			v == null ? null : Array.isArray(v) ? (v as string[]) : (v as string).split(',');

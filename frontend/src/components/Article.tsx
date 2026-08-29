@@ -30,7 +30,10 @@ export default function Article({ article }: { article: Article }) {
 				<Tag tag={article.tag} className={styles.tag} />
 			)}
 
-			<BookmarkButton className={styles.bookmark} />
+			<BookmarkButton
+				className={styles.bookmark}
+				itemInfo={{ id: article.id, type: 'article' }}
+			/>
 
 			{article.tag &&
 				<Tag className={styles.tag} tag={article.tag} />

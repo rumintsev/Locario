@@ -104,8 +104,9 @@ export default function Header() {
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === "Enter") {
-			// router.push(!searchTerm ? "/all" : `/all?query=${encodeURIComponent(searchTerm)}`);
-			// setSearchTerm("");
+			setIsSearchOpen(false);
+			clearSearch();
+			router.push(!searchTerm ? "/feed" : `/feed?q=${encodeURIComponent(searchTerm)}`);
 		}
 	};
 
@@ -165,7 +166,7 @@ export default function Header() {
 										key={`${item.type}-${item.id}`}
 										onClick={() => {
 											if (item.type === 'tag') {
-												router.push(`/search/tag/${item.slug}`)
+												router.push(`/feed?tags=${item.slug}`)
 											} else {
 												router.push(`/${typeToPath[item.type]}/${item.id}`);
 											} setSearchTerm("");
@@ -198,7 +199,7 @@ export default function Header() {
 					className={styles.icons}
 					style={{ display: isSearchOpen && isMobile ? 'none' : 'flex' }}
 				>
-					<Link href={'/favourite'}><FavouriteIcon /></Link>
+					<Link href={'/favourites'}><FavouriteIcon /></Link>
 					<Link href={'/'}><ProfileIcon /></Link>
 				</div>
 			</div>

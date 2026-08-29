@@ -61,7 +61,10 @@ export default async function ArticlePage({
 			<div className={styles.articlePage}>
 				<div className={styles.articlePageContent}>
 
-					<BookmarkButton className={styles.bookmark} />
+					<BookmarkButton
+						className={styles.bookmark}
+						itemInfo={{ id: article.id, type: 'article' }}
+					/>
 					<h1>{article.name}</h1>
 
 					{article.tags.length > 0 && (

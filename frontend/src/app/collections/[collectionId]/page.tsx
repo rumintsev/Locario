@@ -67,7 +67,10 @@ export default async function CollectionPage({
 			<div className={styles.collectionPage}>
 				<div className={styles.collectionPageContent}>
 
-					<BookmarkButton className={styles.bookmark} />
+					<BookmarkButton
+						className={styles.bookmark}
+						itemInfo={{ id: collection.id, type: 'collection' }}
+					/>
 					<h1>{collection.name}</h1>
 
 					{collection.tags.length > 0 && (
@@ -88,16 +91,19 @@ export default async function CollectionPage({
 								day: 'numeric',
 								month: 'long',
 								year: 'numeric',
-							}).replace(' г.', '')} <span className={styles.dotSpan}/> {collection.items.length} карточек</span>
+							}).replace(' г.', '')} <span className={styles.dotSpan} /> {collection.items.length} карточек</span>
 					</p>
 
 					{collection.items.length > 0 && (
 						<div className={styles.content}>
 
 							{collection.items.map((item) => (
-								<div className={styles.item}>
+								<div className={styles.item} key={item.id}>
 
-									<BookmarkButton className={styles.bookmark} />
+									<BookmarkButton
+										className={styles.bookmark}
+										itemInfo={{ id: item.id, type: collection.type === 'cities' ? 'city' : 'place' }}
+									/>
 
 									{item.photo ? (
 										<div className={styles.photoBlock}>

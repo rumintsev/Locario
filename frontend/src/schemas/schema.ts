@@ -1,3 +1,4 @@
+import { text } from 'stream/consumers';
 import { z } from 'zod';
 
 export type types = 'city' | 'place' | 'article' | 'collection' | 'tag';
@@ -10,6 +11,8 @@ const TagSchema = z.object({
 	text_color: z.string(),
 	bg_color: z.string(),
 })
+
+export type Tag = z.infer<typeof TagSchema>;
 
 // card is place or city
 export const CardSchema = z.object({
@@ -86,6 +89,8 @@ const SearchItemSchema = z.object({
 	updateddate: z.string().nullable(),
 	collection_type: z.enum(['cities', 'places', 'countries']).nullable(),
 	cards_count: z.number().nullable(),
+	text_color: z.string().nullable(),
+	bg_color: z.string().nullable(),
 })
 
 export type SearchItem = z.infer<typeof SearchItemSchema>;
@@ -99,3 +104,10 @@ export const searchResultSchema = z.object({
 })
 
 export type SearchResult = z.infer<typeof searchResultSchema>;
+
+const FavouriteSchema = z.object({
+	id: z.number(),
+	type: z.enum(['city', 'place', 'article', 'collection', 'country']),
+})
+export const FavouritesSchema = z.array(FavouriteSchema);
+export type Favourite = z.infer<typeof FavouriteSchema>

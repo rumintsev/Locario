@@ -36,7 +36,6 @@
 .header a:hover,
 .search svg:hover {
 	opacity: var(--opacity-percent);
-	cursor: pointer;
 }
 
 .logo {
@@ -74,6 +73,7 @@
 
 .icons a {
 	display: inline-flex;
+	cursor: pointer;
 }
 
 .search {
@@ -122,8 +122,8 @@
 .search .searchResults li {
 	display: flex;
 	align-items: center;
-	height: 60px;
-	padding: 16px;
+	min-height: 60px;
+	padding: 6px 16px;
 	border-radius: 15px;
 	font-size: 16px;
 	color: var(--text-color);

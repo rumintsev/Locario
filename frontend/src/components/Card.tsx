@@ -35,7 +35,10 @@ export default function Card({ card, type }: { card: Card, type: 'place' | 'city
 	return (
 		<div className={styles.card}>
 
-			<BookmarkButton className={styles.bookmark} />
+			<BookmarkButton
+				className={styles.bookmark}
+				itemInfo={{ id: card.id, type: type }}
+			/>
 
 			{card.photo ? (
 				<Link
@@ -62,7 +65,7 @@ export default function Card({ card, type }: { card: Card, type: 'place' | 'city
 						{card.rate && (
 							<p className={styles.rate}>
 								<StarIcon />
-								{card.rate}
+								{card.rate.toFixed(1)}
 							</p>
 						)}
 						{card.tag && (
@@ -71,7 +74,10 @@ export default function Card({ card, type }: { card: Card, type: 'place' | 'city
 					</div>
 				)}
 
-				<Link href={`/${types[type]}/${card.id}`}>{card.name}</Link>
+				<Link
+					className={styles.name}
+					href={`/${types[type]}/${card.id}`}
+				>{card.name}</Link>
 				<p className={styles.extra}>{new Date(
 					card.updateddate).toLocaleDateString('ru-RU', {
 						day: 'numeric',

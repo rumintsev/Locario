@@ -62,7 +62,10 @@ export default async function CityPage({
 			<div className={styles.cityPage}>
 				<div className={styles.cityPageContent}>
 
-					<BookmarkButton className={styles.bookmark} />
+					<BookmarkButton 
+					className={styles.bookmark}
+					itemInfo={{ id: city.id, type: 'city' }}
+					/>
 
 					<div className={styles.nameBlock}>
 						<h1>{city.name}</h1>
