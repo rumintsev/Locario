@@ -2,6 +2,7 @@
 	max-width: calc(var(--page-width) + 2 * var(--side-padding));
 	width: 100%;
 	padding: 0 var(--side-padding);
+	padding-bottom: 20px;
 	margin: 0 auto;
 	font-family: var(--unbounded), sans-serif;
 	font-weight: 500;

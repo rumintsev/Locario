@@ -1,4 +1,3 @@
-import { text } from 'stream/consumers';
 import { z } from 'zod';
 
 export type types = 'city' | 'place' | 'article' | 'collection' | 'tag';

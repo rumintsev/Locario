@@ -1,0 +1,9 @@
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 35px;
+	border-top: 1px solid var(--hr-color);
+	max-width: calc(var(--page-width) + 2 * var(--side-padding));
+	margin: 0 auto;
+	padding-top: 20px;
+}

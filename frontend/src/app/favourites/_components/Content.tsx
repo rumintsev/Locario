@@ -1,16 +1,16 @@
 'use client';
 
+// css
+import styles from './Content.module.css';
+
 import { useEffect, useState } from "react";
 import { type Favourite, FavouritesSchema } from "@/schemas/schema";
-// import { clientFetch } from "@/app/actions/clientFetchNew";
+import { fetchFromClientFavourites } from "@/app/favourites/_components/fetchFromClientFavourites";
 import CollectionsClient from '@/components/CollectionsClient'
 import ArticlesClient from '@/components/ArticlesClient'
 import CardsClient from '@/components/CardsClient'
 
 import {
-	CollectionsSchema,
-	ArticlesSchema,
-	CardsSchema,
 	type Collection,
 	type Article,
 	type Card,
@@ -22,104 +22,94 @@ export default function Content() {
 	const [places, setPlaces] = useState<Card[]>([]);
 	const [cities, setCities] = useState<Card[]>([]);
 
-	// useEffect(() => {
-	// 	let favourites: Favourite[] = [];
+	useEffect(() => {
+		let favourites: Favourite[] = [];
 
-	// 	try {
-	// 		const raw = localStorage.getItem('favourites');
-	// 		if (raw === null) return;
-	// 		const result = FavouritesSchema.safeParse(JSON.parse(raw));
-	// 		if (result.success) favourites = result.data;
-	// 	} catch { }
+		try {
+			const raw = localStorage.getItem('favourites');
+			if (raw === null) return;
+			const result = FavouritesSchema.safeParse(JSON.parse(raw));
+			if (result.success) favourites = result.data;
+		} catch {
+			console.error('Zod favourites type from local storage error');
+		}
 
-	// 	const collectionIds = favourites
-	// 		.filter((item) => item.type === 'collection')
-	// 		.map((item) => item.id)
-	// 		.join();
+		const getIds = (type: string) => {
+			return favourites
+				.filter((item) => item.type === type)
+				.map((item) => item.id)
+				.join();
+		}
 
-	// 	const articleIds = favourites
-	// 		.filter((item) => item.type === 'article')
-	// 		.map((item) => item.id)
-	// 		.join();
+		const collectionIds = getIds('collection');
+		const articleIds = getIds('article');
+		const placeIds = getIds('place');
+		const cityIds = getIds('city');
 
-	// 	const placeIds = favourites
-	// 		.filter((item) => item.type === 'place')
-	// 		.map((item) => item.id)
-	// 		.join();
+		if (!collectionIds && !articleIds && !placeIds && !cityIds) return;
 
-	// 	const cityIds = favourites
-	// 		.filter((item) => item.type === 'city')
-	// 		.map((item) => item.id)
-	// 		.join();
+		let cancelled = false;
 
-	// 	if (!collectionIds && !articleIds && !placeIds && !cityIds) return;
+		const load = async () => {
+			const result = await fetchFromClientFavourites({
+				collectionIds: collectionIds,
+				articleIds: articleIds,
+				placeIds: placeIds,
+				cityIds: cityIds,
+			});
+			if (!cancelled) {
+				if (!result.success) {
+					console.error(result.error)
+					return
+				}
+				else {
+					setCollections(result.data.collections);
+					setArticles(result.data.articles);
+					setPlaces(result.data.places);
+					setCities(result.data.cities);
+				}
+			}
+		};
 
-	// 	async function fetchData() {
-	// 		const collectionsResult = await clientFetch(
-	// 			`/collections/short/${collectionIds}`,
-	// 			CollectionsSchema
-	// 		);
-	// 		console.log(collectionsResult)
-	// 		if (collectionsResult.success) {
-	// 			setCollections(collectionsResult.data);
-	// 		}
+		load();
 
-	// 		const articlesResult = await clientFetch(
-	// 			`/articles/short/${articleIds}`,
-	// 			ArticlesSchema
-	// 		);
-	// 		if (articlesResult.success) {
-	// 			setArticles(articlesResult.data);
-	// 		}
-
-	// 		const placesResult = await clientFetch(
-	// 			`/places/short/${placeIds}`,
-	// 			CardsSchema
-	// 		);
-	// 		if (placesResult.success) {
-	// 			setPlaces(placesResult.data);
-	// 		}
-
-	// 		const citiesResult = await clientFetch(
-	// 			`/cities/short/${cityIds}`,
-	// 			CardsSchema
-	// 		);
-	// 		if (citiesResult.success) {
-	// 			setCities(citiesResult.data);
-	// 		}
-	// 	}
-
-	// 	fetchData();
-	// }, []);
+	}, []);
 
 	return (
-		<>
-			{collections.length > 0 &&
-				<CollectionsClient
-					headline='Подборки'
-					collections={collections}
-				/>
-			}
-			{articles.length > 0 &&
-				<ArticlesClient
-					headline="Статьи"
-					articles={articles}
-				/>
-			}
-			{places.length > 0 &&
-				<CardsClient
-					headline="Места"
-					type="place"
-					cards={places}
-				/>
-			}
-			{cities.length > 0 &&
-				<CardsClient
-					headline="Города"
-					type="city"
-					cards={cities}
-				/>
-			}
-		</>
+		(
+			collections.length > 0 ||
+			articles.length > 0 ||
+			places.length > 0 ||
+			cities.length > 0
+		) && (
+			<div className={styles.content}>
+				{collections.length > 0 &&
+					<CollectionsClient
+						headline='Подборки'
+						collections={collections}
+					/>
+				}
+				{articles.length > 0 &&
+					<ArticlesClient
+						headline="Статьи"
+						articles={articles}
+					/>
+				}
+				{places.length > 0 &&
+					<CardsClient
+						headline="Места"
+						type="place"
+						cards={places}
+					/>
+				}
+				{cities.length > 0 &&
+					<CardsClient
+						headline="Города"
+						type="city"
+						cards={cities}
+					/>
+				}
+			</div>
+		)
 	)
 }
