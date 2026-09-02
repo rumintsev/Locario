@@ -126,7 +126,7 @@
 			min-width: 123px;
 		}
 
-		.collection a {
+		.collection .name {
 			font-size: 16px;
 		}
 

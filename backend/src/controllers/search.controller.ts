@@ -95,7 +95,8 @@ export async function getSearchFull(req: Request, res: Response) {
 			NULL::collection_type AS collection_type,
 			NULL::int AS cards_count,
 			NULL::text AS text_color,
-			NULL::text AS bg_color
+			NULL::text AS bg_color,
+			p.rate::float AS rate
 		FROM places p
 		LEFT JOIN cities city ON city.id = p.city_id
 		LEFT JOIN LATERAL (
@@ -132,7 +133,8 @@ export async function getSearchFull(req: Request, res: Response) {
 			NULL::collection_type AS collection_type,
 			NULL::int AS cards_count,
 			NULL::text AS text_color,
-			NULL::text AS bg_color
+			NULL::text AS bg_color,
+			NULL::numeric(2,1) AS rate
 		FROM cities ci
 		LEFT JOIN countries country ON country.id = ci.country_id
 		LEFT JOIN LATERAL (
@@ -165,7 +167,8 @@ export async function getSearchFull(req: Request, res: Response) {
 			NULL::collection_type AS collection_type,
 			NULL::int AS cards_count,
 			NULL::text AS text_color,
-			NULL::text AS bg_color
+			NULL::text AS bg_color,
+			NULL::numeric(2,1) AS rate
 		FROM countries co
 		WHERE co.visibility = true
 			AND ($1::text IS NULL OR co.name ILIKE '%' || $1 || '%')
@@ -185,7 +188,8 @@ export async function getSearchFull(req: Request, res: Response) {
 			col.type AS collection_type,
 			COALESCE(cnt.cards_count, 0) AS cards_count,
 			NULL::text AS text_color,
-			NULL::text AS bg_color
+			NULL::text AS bg_color,
+			NULL::numeric(2,1) AS rate
 		FROM collections col
 		LEFT JOIN LATERAL (
 			SELECT json_agg(found.photo_url ORDER BY found.entity_position)::jsonb AS urls
@@ -254,7 +258,8 @@ export async function getSearchFull(req: Request, res: Response) {
 			NULL::collection_type AS collection_type,
 			NULL::int AS cards_count,
 			NULL::text AS text_color,
-			NULL::text AS bg_color
+			NULL::text AS bg_color,
+			NULL::numeric(2,1) AS rate
 		FROM articles a
 		LEFT JOIN LATERAL (
 			SELECT ap.url
@@ -287,7 +292,8 @@ export async function getSearchFull(req: Request, res: Response) {
 			NULL::text AS updateddate,
 			NULL::collection_type AS collection_type,
 			NULL::int AS cards_count,
-			t.text_color, t.bg_color
+			t.text_color, t.bg_color,
+			NULL::numeric(2,1) AS rate
 		FROM tags t
 		WHERE $1::text IS NOT NULL AND $1 != ''
 			AND t.name ILIKE '%' || $1 || '%'

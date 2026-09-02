@@ -28,7 +28,7 @@
 	width: 35px;
 }
 
-.feedDescription {
+.description {
 	font-size: 18px;
 	font-weight: 500;
 	color: var(--text-gray);
@@ -50,7 +50,7 @@
 		width: 24px;
 	}
 
-	.feedDescription {
+	.description {
 		font-size: 14px;
 		margin-bottom: 12px;
 	}

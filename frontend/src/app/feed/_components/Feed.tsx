@@ -46,8 +46,18 @@ const CONTENT_TYPES: { label: string; value: types }[] = [
 	{ label: 'Места', value: 'place' },
 	{ label: 'Города', value: 'city' },
 ];
+function toCard(item: SearchItem): Card {
+	return {
+		id: item.id,
+		name: item.name,
+		rate: item.rate ?? null,
+		updateddate: item.updateddate ?? '',
+		photo: item.photos[0] ?? null,
+		tag: item.tag,
+	};
+}
 
-function toCardOrArticle(item: SearchItem): Card | Article {
+function toArticle(item: SearchItem): Article {
 	return {
 		id: item.id,
 		name: item.name,
@@ -82,9 +92,9 @@ function toTag(item: SearchItem): Tag {
 function Content(searchItems: SearchItem[]) {
 	const tags = searchItems.filter((item) => item.type === 'tag').map(toTag);
 	const collections = searchItems.filter((item) => item.type === 'collection').map(toCollection);
-	const articles = searchItems.filter((item) => item.type === 'article').map(toCardOrArticle);
-	const places = searchItems.filter((item) => item.type === 'place').map(toCardOrArticle);
-	const cities = searchItems.filter((item) => item.type === 'city').map(toCardOrArticle);
+	const articles = searchItems.filter((item) => item.type === 'article').map(toArticle);
+	const places = searchItems.filter((item) => item.type === 'place').map(toCard);
+	const cities = searchItems.filter((item) => item.type === 'city').map(toCard);
 
 	return (
 		searchItems.length > 0 ? (

@@ -10,3 +10,9 @@
 .tag:hover {
 	opacity: var(--opacity-percent);
 }
+
+@media (max-width: 599px) {
+	.tag {
+		font-size: 10px;
+	}
+}

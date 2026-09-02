@@ -38,7 +38,7 @@ export default async function FeedPage({ searchParams }: {
 						<h1>Лента</h1>
 						<CompasIcon />
 					</div>
-					<p className={styles.feedDescription}>Вдохновение для ваших путешествий</p>
+					<p className={styles.description}>Вдохновение для ваших путешествий</p>
 
 				</div>
 			</div>

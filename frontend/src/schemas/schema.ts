@@ -90,6 +90,7 @@ const SearchItemSchema = z.object({
 	cards_count: z.number().nullable(),
 	text_color: z.string().nullable(),
 	bg_color: z.string().nullable(),
+	rate: z.number().nullable()
 })
 
 export type SearchItem = z.infer<typeof SearchItemSchema>;
